@@ -12,6 +12,7 @@ import { SupplierRegistrationComponent } from './pages/supplier-registration/sup
 import { SupplierProfileComponent } from './pages/supplier-profile/supplier-profile.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { AddProductComponent } from './pages/products/supplier/add-product/add-product.component';
+import { ProductListComponent } from './pages/products/supplier/product-list/product-list.component';
 
 const appRoutes: Routes = [
   {
@@ -64,6 +65,15 @@ const appRoutes: Routes = [
     component: AddProductComponent,
     data: {
       title: 'Add New Product',
+    },
+    canActivate: [AuthGuardGuard],
+    pathMatch: 'full',
+  },
+  {
+    path: 'pages/dashboard/supplier/product/manage',
+    component: ProductListComponent,
+    data: {
+      title: 'Manage Your Products',
     },
     canActivate: [AuthGuardGuard],
     pathMatch: 'full',

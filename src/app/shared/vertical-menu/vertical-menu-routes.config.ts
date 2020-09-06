@@ -8,7 +8,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/inbox', title: 'Products', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
           { path: '/pages/dashboard/supplier/product/add', title: 'New Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/pages/users-view', title: 'Manage Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/pages/dashboard/supplier/product/manage', title: 'Manage Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
 },
   { path: '/inbox', title: 'Orders', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
