@@ -1,0 +1,187 @@
+@import "assets/sass/core/variables/gradient-variables.scss";
+
+
+:host /deep/ .ct-grid {
+  stroke-dasharray : 0;
+  stroke : rgba(0, 0, 0, 0.1);
+}
+
+:host /deep/ .ct-label {
+  font-size : 0.9rem;
+}
+
+:host /deep/ .WidgetlineChart .ct-point {
+  stroke-width : 0;
+}
+
+:host /deep/ .WidgetlineChart .ct-line {
+  stroke : rgba(255, 255, 255, 0.6);
+    stroke-width: 4px;
+}
+
+:host /deep/ .WidgetlineChart .ct-grid {
+  stroke-dasharray : 0;
+  stroke : transparent !important;
+}
+
+:host /deep/ .WidgetlineChart .ct-point-regular {
+  stroke-width : 2px;
+  fill : transparent;
+  stroke : transparent !important;
+}
+
+:host /deep/ .WidgetlineChartshadow {
+  -webkit-filter : drop-shadow(0px 13px 6px rgba(0, 0, 0, 0.5));
+          filter : drop-shadow(0px 13px 6px rgba(0, 0, 0, 0.5));
+  /* Same syntax as box-shadow, except for the spread property */
+}
+
+:host /deep/ .lineArea .ct-line {
+  stroke-width : 0;
+}
+
+:host /deep/ .lineArea .ct-point {
+  stroke-width : 0;
+}
+
+:host /deep/ .lineArea .ct-series-a .ct-area {
+  fill-opacity : 0.7;
+  fill : url($dashboard1-gradient-path +  #gradient1) !important;
+}
+
+:host /deep/ .lineArea .ct-series-b .ct-area {
+  fill : url($dashboard1-gradient-path +  #gradient) !important;
+  fill-opacity : 0.9;
+}
+
+:host /deep/ .lineArea .ct-point-regular {
+  stroke-width : 2px;
+  fill : transparent;
+  stroke : transparent !important;
+}
+
+:host /deep/ .Stackbarchart .ct-series-a .ct-bar {
+  stroke : url($dashboard1-gradient-path +  #linear) !important;
+}
+
+:host /deep/ .Stackbarchart .ct-series-b .ct-bar {
+  stroke : #EEEEEE;
+}
+
+:host /deep/ .shopping-cart i.ft-trash-2 {
+  cursor : pointer;
+}
+:host /deep/ .shopping-cart i.ft-trash-2:hover {
+  color : #F55252;
+}
+
+:host /deep/ .shopping-cart table td {
+  vertical-align : middle;
+}
+
+:host /deep/ .lineArea2 .ct-line {
+  fill : none;
+  stroke-width : 2px;
+}
+
+:host /deep/ .lineArea2 .ct-point-circle {
+  stroke-width : 2px;
+  fill : #FFFFFF;
+}
+
+:host /deep/ .lineArea2 .ct-series-a .ct-area {
+  fill : url($dashboard1-gradient-path +  #gradient2) !important;
+  fill-opacity : 0.8;
+}
+
+:host /deep/ .lineArea2 .ct-series-a .ct-line {
+  stroke : #60AFF0;
+}
+
+:host /deep/ .lineArea2 .ct-series-a .ct-point-circle {
+  stroke : #2F8BE6;
+}
+
+:host /deep/ .lineArea2 .ct-series-b .ct-area {
+  fill : url($dashboard1-gradient-path +  #gradient3) !important;
+  fill-opacity : 0.8;
+}
+
+:host /deep/ .lineArea2 .ct-series-b .ct-line {
+  stroke : #6CD975;
+}
+
+:host /deep/ .lineArea2 .ct-series-b .ct-point-circle {
+  stroke : #40C057;
+}
+
+:host /deep/ .lineChart .ct-line {
+  fill : none;
+  stroke : #FFFFFF;
+  stroke-width : 1px;
+}
+
+:host /deep/ .lineChart .ct-label {
+  color : #FFFFFF;
+}
+
+:host /deep/ .lineChart .ct-point-circle {
+  stroke-width : 2px;
+  fill : #FFFFFF;
+}
+
+:host /deep/ .lineChart .ct-series-a .ct-point-circle, .lineChart .ct-series-a .ct-point {
+  stroke : #FFFFFF;
+}
+
+:host /deep/ .lineChartShadow {
+  -webkit-filter : drop-shadow(0px 25px 8px rgba(0, 0, 0, 0.5));
+          filter : drop-shadow(0px 25px 8px rgba(0, 0, 0, 0.5));
+  /* Same syntax as box-shadow, except for the spread property */
+}
+
+:host /deep/ .BarChart .ct-series-a .ct-bar:nth-of-type(4n+1) {
+  stroke : url($dashboard1-gradient-path +  #gradient7);
+}
+
+:host /deep/ .BarChart .ct-series-a .ct-bar:nth-of-type(4n+2) {
+  stroke : url($dashboard1-gradient-path +  #gradient5);
+}
+
+:host /deep/ .BarChart .ct-series-a .ct-bar:nth-of-type(4n+3) {
+  stroke : url($dashboard1-gradient-path +  #gradient6);
+}
+
+:host /deep/ .BarChart .ct-series-a .ct-bar:nth-of-type(4n+4) {
+  stroke : url($dashboard1-gradient-path +  #gradient4);
+}
+
+:host /deep/ .BarChartShadow {
+  -webkit-filter : drop-shadow(0px 20px 8px rgba(0, 0, 0, 0.3));
+          filter : drop-shadow(0px 20px 8px rgba(0, 0, 0, 0.3));
+  /* Same syntax as box-shadow, except for the spread property */
+}
+
+:host /deep/ .donut .ct-label {
+  font-size : 20px;
+}
+
+:host /deep/ .donut .ct-done .ct-slice-donut {
+  stroke : #40C057;
+  stroke-width : 24px !important;
+}
+
+:host /deep/ .donut .ct-progress .ct-slice-donut {
+  stroke : #F77E17;
+  stroke-width : 16px !important;
+}
+
+:host /deep/ .donut .ct-outstanding .ct-slice-donut {
+  stroke : #975AFF;
+  stroke-width : 8px !important;
+}
+
+:host /deep/ .donut .ct-started .ct-slice-donut {
+  stroke : #2F8BE6;
+  stroke-width : 32px !important;
+}

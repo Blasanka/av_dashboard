@@ -1,0 +1,200 @@
+<ngx-loading-bar></ngx-loading-bar>
+
+<section class="page-user-profile">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="user-profile-images">
+          <!-- user timeline image -->
+          <img src="assets/img/banner/profile-image.jpg" class="img-fluid rounded-top user-timeline-image"
+            alt="User Timeline Image">
+          <!-- user profile image -->
+          <img src="assets/img/portrait/small/avatar-s-20.png" class="user-profile-image rounded"
+            alt="User Profile Image" height="140" width="140">
+        </div>
+        <div class="user-profile-text">
+          <h4 class="profile-text-color mb-0">{{Supplier_Name|uppercase}}</h4>
+          <small>Supplier</small>
+        </div>
+        <!-- user profile body start -->
+        <div class="card-content">
+          <div class="card-body">
+            <div class="user-profile-buttons d-flex justify-content-center justify-content-sm-start">
+              <!-- <button class="btn btn-primary mr-3">Follow</button> -->
+              <button class="btn bg-light-primary" (click)="editSupplier()">Edit</button>
+            </div>
+          </div>
+          <!-- user profile body ends -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Profile posts and info starts -->
+  <div class="row profile-info-posts">
+    <!-- 1st column starts -->
+    <div class="col-lg-12 col-12">
+      <div class="row">
+
+        <form [formGroup]="supplierForm" (ngSubmit)="supplierSubmit()" class="col-12">
+
+          <!-- Business Info starts -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title m-0">About</h4>
+                <span class="cursor-pointer"><i class="ft-more-vertical-"></i></span>
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <!-- <label for="supEmail" class="col-sm-2 col-form-label">Email</label> -->
+                    <div class="col-sm-12">
+                      <input type="text" [readonly]="readonly == true"
+                        [ngClass]="{'form-control-plaintext': readonly == true, 'form-control': readonly == false }"
+                        id="supBusinessInfo" formControlName="supBusinessInfo" value=""
+                        >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Business Info ends -->
+
+          <!-- Basic Info starts -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title m-0">Basic Information</h4>
+                <span class="cursor-pointer"><i class="ft-more-vertical-"></i></span>
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+                  <!-- <div class="row">
+                        <div class="col-4">
+                            <ul class="list-unstyled mb-0">
+                                <li class="d-flex align-items-center">
+                                  <i class="ft-briefcase mr-2 cursor-pointer"></i><span>Email</span>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                  <i class="ft-briefcase mr-2 cursor-pointer"></i><span>Mobile</span>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                  <i class="ft-file-text mr-2 cursor-pointer"></i><span>Display Name</span>
+                                </li>
+                              </ul>
+                        </div>
+                        <div class="col-4">
+
+                        </div>
+                    </div> -->
+
+                  <div class="form-group row">
+                    <label for="supEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="text" [readonly]="readonly == true"
+                        [ngClass]="{'form-control-plaintext': readonly == true, 'form-control': readonly == false, 'is-invalid': supplierFormSubmitted && sf.supEmail.invalid, 'is-valid': supplierFormSubmitted && !sf.supEmail.invalid }"
+                        id="supEmail" formControlName="supEmail" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="supMobile" class="col-sm-2 col-form-label">Mobile</label>
+                    <div class="col-sm-10">
+                      <input type="text" [readonly]="readonly == true"
+                        [ngClass]="{'form-control-plaintext': readonly == true, 'form-control': readonly == false,'is-invalid': supplierFormSubmitted && sf.supMobile.invalid, 'is-valid': supplierFormSubmitted && !sf.supMobile.invalid   }"
+                        id="supMobile" formControlName="supMobile" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="supUsername" class="col-sm-2 col-form-label">Display Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" readonly class="form-control-plaintext" id="supUsername" value=""
+                        formControlName="supUsername">
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Basic Info ends -->
+
+
+
+          <!-- Bussiness Information starts -->
+          <div class="col-12">
+            <div class="card">
+
+              <div class="card-header">
+                <h4 class="card-title">Bussiness Information</h4>
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+
+                  <div class="form-group row">
+                    <label for="supLegName" class="col-sm-2 col-form-label">Legal Name </label>
+                    <div class="col-sm-10">
+                      <input type="text" [readonly]="readonly == true"
+                        [ngClass]="{'form-control-plaintext': readonly == true, 'form-control': readonly == false }"
+                        class="form-control-plaintext" id="supLegName" formControlName="supLegName" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="supAddress" class="col-sm-2 col-form-label">Address</label>
+                    <div class="col-sm-10">
+                      <input type="text" [readonly]="readonly == true"
+                        [ngClass]="{'form-control-plaintext': readonly == true, 'form-control': readonly == false }"
+                        id="supAddress" formControlName="supAddress" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="supPIC" class="col-sm-2 col-form-label">Person in Charge</label>
+                    <div class="col-sm-10">
+                      <input type="text" [readonly]="readonly == true"
+                        [ngClass]="{'form-control-plaintext': readonly == true, 'form-control': readonly == false }"
+                        id="supPIC" formControlName="supPIC" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="supBr" class="col-sm-2 col-form-label">BR Number</label>
+                    <div class="col-sm-10">
+                      <input type="text" [readonly]="readonly == true"
+                        [ngClass]="{'form-control-plaintext': readonly == true, 'form-control': readonly == false }"
+                        id="supBr" formControlName="supBr" value="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="supID" class="col-sm-2 col-form-label">NIC No.</label>
+                    <div class="col-sm-10">
+                      <input type="text" [readonly]="readonly == true"
+                        [ngClass]="{'form-control-plaintext': readonly == true, 'form-control': readonly == false,'is-invalid': supplierFormSubmitted && sf.supID.invalid, 'is-valid': supplierFormSubmitted && !sf.supID.invalid  }"
+                        id="supID" formControlName="supID" value="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Bussiness Information ends -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body text-right col-8">
+                  <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+                  <button type="button" (click)="resetSupplierForm()" class="btn btn-danger">Reset</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- Profile posts and info ends -->
+</section>
