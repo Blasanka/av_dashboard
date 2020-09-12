@@ -4,25 +4,25 @@ import { RouteInfo } from './vertical-menu.metadata';
 export const ROUTES: RouteInfo[] = [
 
   {
-    path: '/pages/dashboard/supplier', title: 'Dashboard', icon: 'ft-home', class: '', badge: '2', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [] },
-  { path: '/inbox', title: 'Products', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+    path: '/supplier/dashboard', title: 'Dashboard', icon: 'ft-home', class: '', badge: '2', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [] },
+  { path: '/supplier/dashboard/products', title: 'Products', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
-          { path: '/pages/dashboard/supplier/product/add', title: 'New Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-          { path: '/pages/dashboard/supplier/product/manage', title: 'Manage Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/supplier/dashboard/products/add', title: 'New Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/supplier/dashboard/products/manage', title: 'Manage Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
 },
-  { path: '/inbox', title: 'Orders', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
-    { path: '/pages/users-list', title: 'Pending Inquiry', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    { path: '/pages/users-view', title: 'Manage Orders', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  { path: '/supplier/dashboard/orders', title: 'Orders', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+    { path: 'supplier/dashboard/orders/add', title: 'Pending Inquiry', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: 'supplier/dashboard/orders/manage', title: 'Manage Orders', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
   ] },
-  { path: '/inbox', title: 'Reviews', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
-    { path: '/pages/users-list', title: 'New Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    { path: '/pages/users-view', title: 'All Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  { path: '/supplier/dashboard/reviews', title: 'Reviews', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+    { path: 'supplier/dashboard/reviews/add', title: 'New Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: 'supplier/dashboard/reviews/manage', title: 'All Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
 
   ] },
-  { path: '/inbox', title: 'Promotions', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
-    { path: '/pages/users-list', title: 'Add Promotion', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    { path: '/pages/users-view', title: 'Manage All Promotions', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  { path: 'supplier/dashboard/promotions/', title: 'Promotions', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+    { path: 'supplier/dashboard/promotions/add', title: 'Add Promotion', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: 'supplier/dashboard/promotions/manage', title: 'Manage Promotions', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
 
   ] },
   // { path: '/chat', title: 'Chat', icon: 'ft-message-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

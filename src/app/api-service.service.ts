@@ -86,6 +86,14 @@ export class ApiServiceService {
     return this.http.post(`${this.baseurl}supplier/products`, data, { headers: headers });
   }
 
+  submitSuplierProductImages(data) {
+    let headers = new HttpHeaders();
+    headers = this.getHeaders();
+    // headers = headers.set('Content-Type', undefined);
+    // headers = headers.set('Accept', 'multipart/form-data');
+    return this.http.post(`${this.baseurl}supplier/products/image`, data, { headers: headers });
+  }
+
   getSuplierAllProducts() {
     let headers = new HttpHeaders();
     headers = this.getHeaders();
