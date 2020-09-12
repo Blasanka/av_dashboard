@@ -27,6 +27,13 @@ export class ApiServiceService {
     return this.http.post(this.baseurl+'supplier_login', data, { headers: headers });
   }
 
+  authenticateAdmin(data) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Accept', 'application/json');
+    return this.http.post(`${this.baseurl}admin/login`, data, { headers: headers });
+  }
+
   setSession(authResult) {
     console.log(authResult.token);
     const expiresAt = moment().add(authResult.data.expires_at, 'second');
@@ -100,6 +107,22 @@ export class ApiServiceService {
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Accept', 'application/json');
     return this.http.get(`${this.baseurl}supplier/products`, { headers: headers });
+  }
+
+  getAdminAllProducts() {
+    let headers = new HttpHeaders();
+    headers = this.getHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Accept', 'application/json');
+    return this.http.get(`${this.baseurl}admin/products`, { headers: headers });
+  }
+
+  changeProductStatus(data) {
+    let headers = new HttpHeaders();
+    headers = this.getHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Accept', 'application/json');
+    return this.http.put(`${this.baseurl}admin/products`, data, { headers: headers });
   }
 
 }

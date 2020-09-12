@@ -1,0 +1,53 @@
+<div class="col-xl-12 col-lg-12 col-12">
+    <ngx-spinner></ngx-spinner>
+    <div class="card shopping-cart">
+        <div class="card-header pb-2">
+            <h4 class="card-title mb-1">Manage Your Products</h4>
+        </div>
+        <div class="card-content">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+            <table class="table text-center m-0">
+                <thead>
+                <tr>
+                    <th>Attachment</th>
+                    <th>Product Name</th>
+                    <!-- <th>Description</th>
+                    <th>Specifications</th> -->
+                    <!-- <th>Color</th> -->
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let prod of products">
+                    <td><img class="height-50" src={{prod.attachment}} alt={{prod.product_name}} /></td>
+                    <td>{{prod.product_name}}</td>
+                    <!-- <td>{{prod.description}}</td>
+                    <td>{{prod.specifications}}</td> -->
+                    <!-- <td>{{prod.color}}</td> -->
+                    <td>{{prod.aqty}}</td>
+                    <td>{{prod.price}}</td>
+                    <td>
+                        <span *ngIf="prod.status == 0" class="badge badge-pill bg-light-info cursor-pointer">
+                            {{(prod.status == -1) ? 'Removed' : 'Pending'}}
+                        </span>
+                        <span *ngIf="prod.status == 1" class="badge badge-pill bg-light-danger cursor-pointer">
+                            Active
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-success cursor-pointer mr-1" (click)="approveProduct(prod)">Approve</span>
+                        <span class="badge badge-danger cursor-pointer">Reject</span>
+                    </td>
+                </tr>
+                <ngx-spinner></ngx-spinner>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>

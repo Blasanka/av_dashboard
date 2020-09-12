@@ -11,6 +11,8 @@ import { AuthGuardGuard } from './auth-guard.guard';
 import { ErrorPageComponent } from './pages/supplier/content-pages/error/error-page.component';
 import { SupplierLoginComponent } from './pages/supplier/content-pages/login/supplier-login.component';
 import { SupplierRegistrationComponent } from './pages/supplier/content-pages/registration/supplier-registration.component';
+import { Dashboard1Component } from './pages/admin/dashboard/dashboard1/dashboard1.component';
+import { LoginComponent } from './pages/admin/login/login.component';
 
 const appRoutes: Routes = [
   {
@@ -18,6 +20,24 @@ const appRoutes: Routes = [
     redirectTo: 'supplier/login',
     canDeactivate: [AuthGuardGuard],
     pathMatch: 'full',
+  },
+  {
+    path: 'admin',
+    redirectTo: 'admin/login',
+    canDeactivate: [AuthGuardGuard],
+    pathMatch: 'full',
+  },
+  {
+    path: 'admin/login',
+    component: LoginComponent,
+    data: {
+      title: 'Login',
+    },
+    pathMatch: 'full',
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
   },
   {
     path: 'supplier/login',
