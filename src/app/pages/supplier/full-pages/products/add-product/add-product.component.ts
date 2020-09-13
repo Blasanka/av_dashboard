@@ -7,6 +7,7 @@ import {
   Renderer2,
   ChangeDetectorRef,
   AfterViewInit,
+  ElementRef,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
@@ -23,7 +24,7 @@ import { finalize } from 'rxjs/internal/operators/finalize';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss'],
+  styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
   public config: any = {};
@@ -35,6 +36,7 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Selected image files
   files: File[] = [];
+  liElement: HTMLLIElement;
 
   public swipeConfig: SwiperConfigInterface = {
     slidesPerView: 'auto',
@@ -43,6 +45,9 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   @ViewChild(SwiperDirective, { static: false }) directiveRef?: SwiperDirective;
+  @ViewChild('image') private image: ElementRef;
+  @ViewChild('browseBtn') private browseBtn: ElementRef;
+  // @Output() close = new EventEmitter();
 
   constructor(
     private configService: ConfigService,
@@ -110,13 +115,59 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
       aqty: '',
       attachment: '',
     });
+    this.resetProductImages();
   }
 
   onImageFileChanged(event: any) {
     this.files.push(event.target.files[0]);
+    if (event.target.files.length > 0) {
+      const selectedFile = event.target.files[0];
+      this.liElement = this.renderer.createElement('li');
+
+      const img: HTMLImageElement = this.renderer.createElement('img');
+      const reader = new FileReader();
+      reader.onload = e => img.src = reader.result.toString();
+      reader.readAsDataURL(selectedFile);
+      // img.src = this.files[0].;
+      this.renderer.addClass(img, 'product-image');
+
+      const a: HTMLAnchorElement = this.renderer.createElement('a');
+      a.innerText = 'Delete';
+      this.renderer.addClass(a, 'delete-btn');
+      a.addEventListener('click', this.deleteProductImage.bind(this, selectedFile, a));
+
+      this.renderer.appendChild(this.image.nativeElement, this.liElement);
+      this.renderer.appendChild(this.liElement, img);
+      this.renderer.appendChild(this.liElement, a);
+      if (this.files.length === 5) {
+        this.renderer.setStyle(this.browseBtn.nativeElement, 'display', 'none');
+      }
+    }
+  }
+
+  deleteProductImage(file, a) {
+    const formData = new FormData();
+    formData.append('filename', file.name);
+    a.parentElement.remove();
+    const index = this.files.indexOf(file, 0);
+    if (index > -1) {
+      this.files.splice(index, 1);
+    }
+  }
+
+  resetProductImages() {
+    this.liElement.remove();
+    this.files = [];
   }
 
   submitImages() {
+    this.spinner.show(undefined, {
+      type: 'ball-triangle-path',
+      size: 'medium',
+      bdColor: 'rgba(0, 0, 0, 0.8)',
+      color: '#fff',
+      fullScreen: true
+    });
     const formData = new FormData();
     this.files.forEach((file: any) => {
       formData.append('attachment', file, file.name);
@@ -125,13 +176,6 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   submitProduct() {
-    this.spinner.show(undefined, {
-      type: 'ball-triangle-path',
-      size: 'medium',
-      bdColor: 'rgba(0, 0, 0, 0.8)',
-      color: '#fff',
-      fullScreen: true
-    });
     this.supplierFormSubmitted = true;
     if (this.supplierForm.valid) {
 
@@ -151,7 +195,9 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
               'Thank you!',
               data.message,
               'success'
-            ).then(() => {});
+            ).then(() => {
+              this.resetProductForm();
+            });
           },
           err => {
             Swal.fire(

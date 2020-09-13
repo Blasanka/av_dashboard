@@ -37,6 +37,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'admin',
+    component: FullLayoutComponent,
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
   },
   {
