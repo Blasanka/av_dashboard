@@ -119,9 +119,9 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onImageFileChanged(event: any) {
-    this.files.push(event.target.files[0]);
     if (event.target.files.length > 0) {
       const selectedFile = event.target.files[0];
+      this.files.push(selectedFile);
       this.liElement = this.renderer.createElement('li');
 
       const img: HTMLImageElement = this.renderer.createElement('img');
@@ -170,8 +170,9 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     const formData = new FormData();
     this.files.forEach((file: any) => {
-      formData.append('attachment', file, file.name);
+      formData.append('attachment[]', file, file.name);
     });
+    console.log(formData.getAll('attachment[]'));
     return this.api.submitSuplierProductImages(formData);
   }
 
@@ -179,11 +180,12 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
     this.supplierFormSubmitted = true;
     if (this.supplierForm.valid) {
 
-      this.submitImages().subscribe((images: any) => {
+      this.submitImages().subscribe((res: any) => {
         this.supplierForm.value['price'] = parseFloat(this.supplierForm.value['price']);
         this.supplierForm.value['aqty'] = parseInt(this.supplierForm.value['aqty'], 10);
 
-        this.supplierForm.value['attachment'] = images.message;
+        this.supplierForm.value['attachment'] = res.data;
+        console.log(res.data);
 
         this.api
           .submitSuplierProduct(JSON.stringify(this.supplierForm.value))
@@ -196,7 +198,7 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
               data.message,
               'success'
             ).then(() => {
-              this.resetProductForm();
+              // this.resetProductForm();
             });
           },
           err => {
@@ -210,6 +212,9 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
           () => {
             console.log('Done!');
           });
+      },
+      err => {
+        this.spinner.hide();
       });
     } else {
       this.spinner.hide();

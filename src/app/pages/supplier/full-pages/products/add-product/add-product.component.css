@@ -34,7 +34,7 @@ a.delete-btn {
     cursor: pointer;
 }
 
-#cameraImg {
+#attachment {
     cursor: pointer;
     opacity: 0;
     position: absolute;
