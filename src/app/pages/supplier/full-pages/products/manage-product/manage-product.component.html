@@ -34,7 +34,12 @@
                     <td>{{prod.aqty}}</td>
                     <td>{{prod.price}}</td>
                     <td>
-                        <span class="badge badge-pill bg-light-primary cursor-pointer">{{(prod.status == 0) ? 'Pending' : (prod.status == 1) ? 'Active' : 'Removed'}}</span>
+                        <span *ngIf="prod.status == 0" class="badge badge-pill bg-light-info cursor-pointer">
+                            {{(prod.status == -1) ? 'Removed' : 'Pending'}}
+                        </span>
+                        <span *ngIf="prod.status == 1" class="badge badge-pill bg-light-danger cursor-pointer">
+                            Active
+                        </span>
                     </td>
                     <td>
                         <i class="ft-edit-2"></i>
