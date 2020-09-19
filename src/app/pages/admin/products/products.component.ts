@@ -39,35 +39,45 @@ export class AdminProductsComponent implements OnInit, OnDestroy, AfterViewInit 
     });
   }
 
-  approveProduct(product) {
-    this.spinner.show('Updating...', {
-        type: 'ball-triangle-path',
-        size: 'medium',
-        bdColor: 'rgba(0, 0, 0, 0.8)',
-        color: '#fff',
-        fullScreen: true
-      });
-    this.api.changeProductStatus(JSON.stringify(product))
-    .pipe(
-      finalize(() => this.spinner.hide())
-    )
-    .subscribe((res: any) => {
-      const index = this.products.indexOf(product);
-      product.status = 1;
-      this.products[index] = product;
-      Swal.fire(
-        'Successfully approved!',
-        'Product is listed and visible.',
-        'success'
-      );
-    },
-    err => {
-      console.log(err);
-      Swal.fire(
-        'Update failed!',
-        'Please, try again.',
-        'error'
-      );
+  changePendingStatus(product, status) {
+    Swal.fire({
+      title: 'Do you want to change the status?',
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: 'Yes',
+      icon: 'warning',
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.spinner.show('Updating...', {
+          type: 'ball-triangle-path',
+          size: 'medium',
+          bdColor: 'rgba(0, 0, 0, 0.8)',
+          color: '#fff',
+          fullScreen: true
+        });
+        this.api.changeProductStatus(JSON.stringify(product))
+        .pipe(
+          finalize(() => this.spinner.hide())
+        )
+        .subscribe((res: any) => {
+          const index = this.products.indexOf(product);
+          product.status = status;
+          this.products[index] = product;
+          Swal.fire(
+            'Successfully approved!',
+            'Product is listed and visible.',
+            'success'
+          );
+        },
+        err => {
+          console.log(err);
+          Swal.fire(
+            'Update failed!',
+            'Please, try again.',
+            'error'
+          );
+        });
+      }
     });
   }
 

@@ -1,5 +1,4 @@
 <div class="col-xl-12 col-lg-12 col-12">
-    <ngx-spinner></ngx-spinner>
     <div class="card shopping-cart">
         <div class="card-header pb-2">
             <h4 class="card-title mb-1">Manage Your Products</h4>
@@ -7,6 +6,7 @@
         <div class="card-content">
         <div class="card-body p-0">
             <div class="table-responsive">
+            <ngx-spinner></ngx-spinner>
             <table class="table text-center m-0">
                 <thead>
                 <tr>
@@ -34,17 +34,17 @@
                     <td>{{prod.aqty}}</td>
                     <td>{{prod.price}}</td>
                     <td>
-                        <span *ngIf="prod.status == 0" class="badge badge-pill bg-light-info cursor-pointer">
+                        <span *ngIf="prod.status == 0" class="badge badge-pill bg-light-danger cursor-pointer">
                             {{(prod.status == -1) ? 'Removed' : 'Pending'}}
                         </span>
-                        <span *ngIf="prod.status == 1" class="badge badge-pill bg-light-danger cursor-pointer">
+                        <span *ngIf="prod.status == 1" class="badge badge-pill bg-light-info cursor-pointer">
                             Active
                         </span>
                     </td>
                     <td>
                         <i class="ft-edit-2"></i>
                     </td>
-                    <td>
+                    <td (click)="deleteProduct(prod)">
                         <i class="ft-trash-2"></i>
                     </td>
                 </tr>

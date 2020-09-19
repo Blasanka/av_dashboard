@@ -125,4 +125,12 @@ export class ApiServiceService {
     return this.http.put(`${this.baseurl}admin/products`, data, { headers: headers });
   }
 
+  deleteProduct(id) {
+    let headers = new HttpHeaders();
+    headers = this.getHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Accept', 'application/json');
+    return this.http.delete(`${this.baseurl}supplier/products/${id}`, { headers: headers });
+  }
+
 }

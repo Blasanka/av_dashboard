@@ -25,6 +25,7 @@ import { AllReviewsComponent } from './reviews/all-reviews/all-reviews.component
 import { PendingOrdersComponent } from './orders/pending-orders/pending-orders.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxDatatableModule,
     CommonModule,
     MatchHeightModule,
-    AngularResizedEventModule
+    AngularResizedEventModule,
+    QuillModule.forRoot(),
   ],
   declarations: [
     SupplierComponent,

@@ -33,24 +33,21 @@
                   <div class="form-group row">
                     <label for="description" class="col-sm-2 col-form-label">Description</label>
                     <div class="col-sm-10">
-                      <textarea
+                      <quill-editor
+                        [styles]="{height: '200px'}"
                         [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.description.invalid, 'is-valid': supplierFormSubmitted && !sf.description.invalid }"
-                        class="form-control" 
                         id="description" 
-                        formControlName="description"
-                        value=""></textarea>
+                        formControlName="description"></quill-editor>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="specifications" class="col-sm-2 col-form-label">Specifications</label>
                     <div class="col-sm-10">
-                      <textarea
-                        cols="40" rows="5"
-                        class = 'form-control'
+                      <quill-editor
                         [ngClass]="{'is-invalid': supplierFormSubmitted && sf.specifications.invalid, 'is-valid': supplierFormSubmitted && !sf.specifications.invalid }" 
+                        [styles]="{height: '200px'}"
                         id="specifications" 
-                        formControlName="specifications" 
-                        value=""></textarea>
+                        formControlName="specifications"></quill-editor>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -86,17 +83,6 @@
                         value="" />
                     </div>
                   </div>
-                  <!-- <div class="form-group row">
-                    <label for="attachment" class="col-sm-2 col-form-label">Attachment</label>
-                    <div class="col-sm-10">
-                      <input type="file"
-                        [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.attachment.invalid, 'is-valid': supplierFormSubmitted && !sf.attachment.invalid }"
-                        class="form-control" 
-                        id="attachment" 
-                        formControlName="attachment"
-                        (change) = "onImageFileChanged($event)" />
-                    </div>
-                  </div> -->
                   <div class="form-group row">
                     <label for="attachment" class="col-sm-2 col-form-label">Attachment</label>
                     <div class="upload-image px-2">

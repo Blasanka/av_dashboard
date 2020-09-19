@@ -54,7 +54,7 @@ const firebaseConfig = {
   declarations: [
     AppComponent,
     FullLayoutComponent,
-    ContentLayoutComponent,
+    ContentLayoutComponent
   ],
   imports: [
     BrowserAnimationsModule,

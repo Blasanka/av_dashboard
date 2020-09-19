@@ -338,7 +338,7 @@ export function PromptFunction() {
   },
     'Question 2',
     'Question 3'
-  ]).then(function (result) {
+  ]).then(function (result: any) {
     if (result.value) {
       swal.fire({
         title: 'All done!',

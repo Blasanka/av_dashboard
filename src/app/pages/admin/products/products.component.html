@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let prod of products">
-                    <td><img class="height-50" src={{prod.attachment}} alt={{prod.product_name}} /></td>
+                    <td><img class="height-50" *ngFor="let img of prod.attachment" src={{img}} alt={{prod.product_name}} /></td>
                     <td>{{prod.product_name}}</td>
                     <!-- <td>{{prod.description}}</td>
                     <td>{{prod.specifications}}</td> -->
@@ -32,15 +32,18 @@
                     <td>{{prod.price}}</td>
                     <td>
                         <span *ngIf="prod.status == 0" class="badge badge-pill bg-light-info cursor-pointer">
-                            {{(prod.status == -1) ? 'Removed' : 'Pending'}}
+                            Pending
                         </span>
-                        <span *ngIf="prod.status == 1" class="badge badge-pill bg-light-danger cursor-pointer">
+                        <span *ngIf="prod.status == 1" class="badge badge-pill bg-light-warning cursor-pointer">
                             Active
                         </span>
+                        <span *ngIf="prod.status == -1" class="badge badge-pill bg-light-danger cursor-pointer">
+                            Rejected
+                        </span>
                     </td>
-                    <td>
-                        <span class="badge badge-success cursor-pointer mr-1" (click)="approveProduct(prod)">Approve</span>
-                        <span class="badge badge-danger cursor-pointer">Reject</span>
+                    <td style="text-align: left;">
+                        <span *ngIf="prod.status != 1" class="badge badge-success cursor-pointer mr-1 mb-1" (click)="changePendingStatus(prod, 1)">Approve</span>
+                        <span *ngIf="prod.status != -1" class="badge badge-danger cursor-pointer" (click)="changePendingStatus(prod, -1)">Reject</span>
                     </td>
                 </tr>
                 <ngx-spinner></ngx-spinner>
