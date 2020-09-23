@@ -5,6 +5,7 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { AuthGuardGuard } from 'app/auth-guard.guard';
 import { ManageProductComponent } from './products/manage-product/manage-product.component';
 import { SupplierComponent } from './dashboard/supplier.component';
+import { UpdateProductComponent } from './products/update-product/update-product.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,6 @@ const routes: Routes = [
           title: 'Dashboard',
         },
         canActivate: [AuthGuardGuard],
-        pathMatch: 'full',
       },
       {
         path: 'products/add',
@@ -33,6 +33,15 @@ const routes: Routes = [
         component: ManageProductComponent,
         data: {
           title: 'Manage Your Products',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'products/manage/update',
+        component: UpdateProductComponent,
+        data: {
+          title: 'Update Product',
         },
         canActivate: [AuthGuardGuard],
         pathMatch: 'full',

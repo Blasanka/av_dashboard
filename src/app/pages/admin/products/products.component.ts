@@ -55,7 +55,10 @@ export class AdminProductsComponent implements OnInit, OnDestroy, AfterViewInit 
           color: '#fff',
           fullScreen: true
         });
-        this.api.changeProductStatus(JSON.stringify(product))
+        // This is to not to update UI until server response
+        const tempProduct = product;
+        tempProduct.status = status;
+        this.api.changeProductStatus(JSON.stringify(tempProduct))
         .pipe(
           finalize(() => this.spinner.hide())
         )

@@ -1,0 +1,122 @@
+<div class="col-xl-12 col-lg-12 col-12">
+    <section>
+    <div class="row">
+      <div class="col-12">
+        <h4 class="py-3 px-3">Supplier</h4>
+      </div>
+    </div>
+    <div class="row">
+      <ngx-spinner></ngx-spinner>
+      <!-- 1st column starts -->
+      <div class="col-lg-12 col-12">
+        <div class="row">
+          <form [formGroup]="supplierForm" (ngSubmit)="submitProduct()" class="col-12">
+            <!-- Basic Info starts -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h4 class="card-title m-0">Update Product</h4>
+                </div>
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="form-group row">
+                      <label for="product_name" class="col-sm-2 col-form-label">Product Name</label>
+                      <div class="col-sm-10">
+                        <input type="text"
+                          [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.product_name.invalid, 'is-valid': supplierFormSubmitted && !sf.product_name.invalid }"
+                          class="form-control" 
+                          id="product_name" 
+                          formControlName="product_name" 
+                          value="" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="description" class="col-sm-2 col-form-label">Description</label>
+                      <div class="col-sm-10">
+                        <quill-editor
+                          [styles]="{height: '200px'}"
+                          [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.description.invalid, 'is-valid': supplierFormSubmitted && !sf.description.invalid }"
+                          id="description" 
+                          formControlName="description"></quill-editor>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="specifications" class="col-sm-2 col-form-label">Specifications</label>
+                      <div class="col-sm-10">
+                        <quill-editor
+                          [ngClass]="{'is-invalid': supplierFormSubmitted && sf.specifications.invalid, 'is-valid': supplierFormSubmitted && !sf.specifications.invalid }" 
+                          [styles]="{height: '200px'}"
+                          id="specifications" 
+                          formControlName="specifications"></quill-editor>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="color" class="col-sm-2 col-form-label">Color</label>
+                      <div class="col-sm-10">
+                        <input type="text"
+                          [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.color.invalid, 'is-valid': supplierFormSubmitted && !sf.color.invalid }"
+                          class="form-control" 
+                          id="color" 
+                          formControlName="color" 
+                          value="" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="price" class="col-sm-2 col-form-label">Price</label>
+                      <div class="col-sm-10">
+                        <input type="text"
+                          [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.price.invalid, 'is-valid': supplierFormSubmitted && !sf.price.invalid }"
+                          class="form-control" 
+                          id="price" 
+                          formControlName="price"
+                          value="" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="aqty" class="col-sm-2 col-form-label">Quantity</label>
+                      <div class="col-sm-10">
+                        <input type="text"
+                          [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.aqty.invalid, 'is-valid': supplierFormSubmitted && !sf.aqty.invalid }"
+                          class="form-control" 
+                          id="aqty" 
+                          formControlName="aqty" 
+                          value="" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="attachment" class="col-sm-2 col-form-label">Attachment</label>
+                      <div class="upload-image px-2">
+                        <div #image class="image-wrapper"></div>
+                        <div #browseBtn class="browse-btn">
+                          <input type="file"
+                            [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.attachment.invalid, 'is-valid': supplierFormSubmitted && !sf.attachment.invalid }"
+                            formControlName="attachment" name="attachment" id="attachment" (change)="onImageFileChanged($event)" />
+                          <div class="browse-image">
+                            <img src="assets/img/icons/camera.png" width="60px" />
+                            <p>Browse image</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-10">
+                          <div class="px-1">
+                            <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+                            <button type="button" (click)="resetProductForm()" class="btn btn-danger">Reset</button>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+  
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  </div>
+  

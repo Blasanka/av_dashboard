@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
 
 import { SupplierComponent } from './dashboard/supplier.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +27,7 @@ import { PendingOrdersComponent } from './orders/pending-orders/pending-orders.c
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { QuillModule } from 'ngx-quill';
+import { UpdateProductComponent } from './products/update-product/update-product.component';
 
 @NgModule({
   imports: [
@@ -49,6 +51,7 @@ import { QuillModule } from 'ngx-quill';
     SupplierComponent,
     AddProductComponent,
     ManageProductComponent,
+    UpdateProductComponent,
     SupplierProfileComponent,
     PendingOrdersComponent,
     ManageOrdersComponent,

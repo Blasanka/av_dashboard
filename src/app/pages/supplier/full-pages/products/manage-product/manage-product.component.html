@@ -42,7 +42,8 @@
                         </span>
                     </td>
                     <td>
-                        <i class="ft-edit-2"></i>
+                        <!-- (click)="navigateToUpdateForm(prod)" -->
+                        <a [routerLink]="['/supplier/dashboard/products/manage/update']"><i class="ft-edit-2"></i></a>
                     </td>
                     <td (click)="deleteProduct(prod)">
                         <i class="ft-trash-2"></i>
