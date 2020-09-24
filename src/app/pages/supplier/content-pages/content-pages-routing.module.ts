@@ -6,8 +6,7 @@ import { ErrorPageComponent } from './error/error-page.component';
 import { ForgotPasswordPageComponent } from './forgot-password/forgot-password-page.component';
 import { LockScreenPageComponent } from './lock-screen/lock-screen-page.component';
 import { LoginPageComponent } from './signin/login-page.component';
-import { MaintenancePageComponent } from './maintenance/maintenance-page.component';
-import { RegisterPageComponent } from './register/register-page.component';
+import { SupplierRegisterComponent } from './register/supplier-register.component';
 
 
 const routes: Routes = [
@@ -33,16 +32,16 @@ const routes: Routes = [
         component: ForgotPasswordPageComponent,
         data: {
           title: 'Forgot Password Page'
-        }
-      },   
-      
+        },
+        pathMatch: 'full'
+      },
       {
         path: 'lockscreen',
         component: LockScreenPageComponent,
         data: {
           title: 'Lock Screen page'
         }
-      },   
+      },
       {
         path: 'signin',
         component: LoginPageComponent,
@@ -51,15 +50,8 @@ const routes: Routes = [
         }
       },
       {
-        path: 'maintenance',
-        component: MaintenancePageComponent,
-        data: {
-          title: 'Maintenance Page'
-        }
-      },
-      {
         path: 'signup',
-        component: RegisterPageComponent,
+        component: SupplierRegisterComponent,
         data: {
           title: 'Register Page'
         }

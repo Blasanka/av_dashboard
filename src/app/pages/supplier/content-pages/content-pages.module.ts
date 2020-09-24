@@ -12,8 +12,7 @@ import { ForgotPasswordPageComponent } from './forgot-password/forgot-password-p
 import { LockScreenPageComponent } from './lock-screen/lock-screen-page.component';
 import { LoginPageComponent } from './signin/login-page.component';
 import { MaintenancePageComponent } from './maintenance/maintenance-page.component';
-import { RegisterPageComponent } from './register/register-page.component';
-import { SupplierRegistrationComponent } from './registration/supplier-registration.component';
+import { SupplierRegisterComponent } from './register/supplier-register.component';
 import { SupplierLoginComponent } from './login/supplier-login.component';
 import { FullPagesRoutingModule } from '../full-pages/full-pages-routing.module';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -31,14 +30,13 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     ],
     declarations: [
         SupplierLoginComponent,
-        SupplierRegistrationComponent,
+        SupplierRegisterComponent,
         ComingSoonPageComponent,
         ErrorPageComponent,
         ForgotPasswordPageComponent,
         LockScreenPageComponent,
         LoginPageComponent,
-        MaintenancePageComponent,
-        RegisterPageComponent
+        MaintenancePageComponent
     ],
 })
 export class ContentPagesModule { }

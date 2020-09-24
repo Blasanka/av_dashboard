@@ -2,19 +2,19 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 // import custom validator to validate that password and confirm password fields match
-import { MustMatch } from '../../../../shared/directives/must-match.validator';
+import { MustMatch } from '../../../shared/directives/must-match.validator';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  templateUrl: './admin-register-page.component.html',
+  styleUrls: ['./admin-register-page.component.scss']
 })
 
-export class RegisterPageComponent implements OnInit {
+export class AdminRegisterPageComponent implements OnInit {
   registerFormSubmitted = false;
   registerForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -40,6 +40,6 @@ export class RegisterPageComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['/pages/login']);
+    this.router.navigate(['/admin/login']);
   }
 }

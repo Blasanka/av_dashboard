@@ -52,36 +52,32 @@ export class SupplierLoginComponent {
         // this.wait =true; 
         this.api.login(JSON.stringify(this.supplierLoginForm.value))
               .subscribe(
-                  (data:any) => {
-                      console.log(data);
-                      // this.wait =false;
-                      if(data.code == 200 ){
+                  (data: any) => {
+                      if (data.code == 200 ) {
                         this.api.setSession(data);
                         console.log('Supplier is logged in');
                         localStorage.setItem('userRole', 'supplier');
                         this.router.navigate(['/supplier/dashboard']);
-                      } else if (data.code == 401){
+                      } else if (data.code == 401) {
                         this.isLoginFailed = true;
-                        this.failed_message ='Your Account is Not Activated Yet!'
+                        this.failed_message = 'Your Account is Not Activated Yet!';
                         this.spinner.hide();
 
                       }
-                 
                   },
-                  (err:any)=>{
+                  (err: any) => {
                     this.isLoginFailed = true;
-                    this.failed_message ='Login failed!'
+                    this.failed_message = 'Login failed!';
                     this.spinner.hide();
-                    console.log('error: ' + err)
+                    console.log('error: ' + err);
                   }
               );
-      } else{
+      } else {
         this.isLoginFailed = true;
-        this.failed_message ='Please Enter Correct Details!'
+        this.failed_message = 'Please Enter Correct Details!'
         this.spinner.hide();
         return;
       }
-      
   }
 
 }

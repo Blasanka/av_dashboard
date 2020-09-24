@@ -66,7 +66,7 @@ export class ApiServiceService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('Accept', 'application/json');
-    return this.http.post(this.baseurl+'supplier_registration', data, { headers: headers });
+    return this.http.post(this.baseurl + 'supplier_registration', data, { headers: headers });
   }
 
   getSupplierDetails() {

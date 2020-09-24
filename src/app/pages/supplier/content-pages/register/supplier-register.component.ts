@@ -4,20 +4,20 @@ import { Router } from '@angular/router';
 import { MustMatch } from 'app/shared/directives/must-match.validator';
 import { ApiServiceService } from 'app/api-service.service';
 import swal from 'sweetalert2/dist/sweetalert2.js';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-supplier-registration',
-  templateUrl: './supplier-registration.component.html',
-  styleUrls: ['./supplier-registration.component.scss']
+  selector: 'app-supplier-register',
+  templateUrl: './supplier-register.component.html',
+  styleUrls: ['./supplier-register.component.scss']
 })
-export class SupplierRegistrationComponent implements OnInit {
+export class SupplierRegisterComponent implements OnInit {
 
   supplierRegisterFormSubmitted = false;
   supplierRegisterForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router,private api: ApiServiceService) { 
-
-  }
+  constructor(private formBuilder: FormBuilder, private router: Router,private api: ApiServiceService,
+    private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
     const telregex = /^(?:0|94|\+94)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|912)(0|2|3|4|5|7|9)|7(0|1|2|5|6|7|8)\d)\d{6}$/;
@@ -46,25 +46,34 @@ export class SupplierRegistrationComponent implements OnInit {
       return;
     }
 
+    this.spinner.show(undefined, {
+      type: 'ball-triangle-path',
+      size: 'medium',
+      bdColor: 'rgba(0, 0, 0, 0.8)',
+      color: '#fff',
+      fullScreen: true
+    });
     this.api.supplier_registration((JSON.stringify(this.supplierRegisterForm.value)))
         .subscribe(
-                  (data:any) => {
-                      console.log(data);    
-                      if(data.code == 200){
-                        swal.fire('Thank you...',
-                         'You Registered Successfully!. Please wait some time to approve you', 
-                         'success').then(()=>{
-                              this.router.navigate(['/supplier/login']);
-                        })
-                      }
-                  },
-                  (err:any)=>{
-                    swal.fire('Oops...',
-                    'Something went wrong!', 
-                    'error');
-                   }
-              );
-    // console.log(this.supplierRegisterForm.value);
+          (data: any) => {
+              if (data.code == 200) {
+                swal.fire('Thank you...',
+                  'You Registered Successfully!. Please wait some time to approve you', 
+                  'success').then(() => {
+                    this.spinner.hide();
+                    this.router.navigate(['/supplier/login']);
+                });
+              }
+          },
+          (err: any) => {
+            this.spinner.hide();
+            swal.fire(
+              'Oops...',
+              'Something went wrong!',
+              'error',
+            );
+        }
+      );
   }
 
 }

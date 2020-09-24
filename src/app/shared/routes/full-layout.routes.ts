@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { SupplierLoginComponent } from 'app/pages/supplier/content-pages/login/supplier-login.component';
 import { AuthGuardGuard } from 'app/auth-guard.guard';
-import { SupplierRegistrationComponent } from 'app/pages/supplier/content-pages/registration/supplier-registration.component';
+import { SupplierRegisterComponent } from 'app/pages/supplier/content-pages/register/supplier-register.component';
 import { SupplierProfileComponent } from 'app/pages/supplier/full-pages/profile/supplier-profile.component';
 
 export const FULL_ROUTES: Routes = [

@@ -24,7 +24,7 @@ export class ForgotPasswordPageComponent {
         this.router.navigate(['login'], { relativeTo: this.route.parent });
     }
 
-    // On registration link click
+    // On register link click
     onRegister() {
         this.router.navigate(['register'], { relativeTo: this.route.parent });
     }

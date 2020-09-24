@@ -18,6 +18,7 @@ import { AngularResizedEventModule } from 'angular-resize-event';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuillModule } from 'ngx-quill';
 import { AddNewProductComponent } from './add-product/add-product.component';
+import { AdminRegisterPageComponent } from './register/admin-register-page.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { AddNewProductComponent } from './add-product/add-product.component';
   ],
   declarations: [
     LoginComponent,
+    AdminRegisterPageComponent,
     AdminProductsComponent,
     DashboardComponent,
     AddNewProductComponent,

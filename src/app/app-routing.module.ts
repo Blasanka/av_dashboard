@@ -10,7 +10,7 @@ import { CONTENT_ROUTES } from './shared/routes/content-layout.routes';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { ErrorPageComponent } from './pages/supplier/content-pages/error/error-page.component';
 import { SupplierLoginComponent } from './pages/supplier/content-pages/login/supplier-login.component';
-import { SupplierRegistrationComponent } from './pages/supplier/content-pages/registration/supplier-registration.component';
+import { SupplierRegisterComponent } from './pages/supplier/content-pages/register/supplier-register.component';
 import { LoginComponent } from './pages/admin/login/login.component';
 
 const appRoutes: Routes = [
@@ -35,6 +35,14 @@ const appRoutes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'admin/register',
+    component: SupplierRegisterComponent,
+    data: {
+      title: 'Register',
+    },
+    pathMatch: 'full',
+  },
+  {
     path: 'admin',
     component: FullLayoutComponent,
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
@@ -49,7 +57,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'supplier/register',
-    component: SupplierRegistrationComponent,
+    component: SupplierRegisterComponent,
     data: {
       title: 'Register',
     },
