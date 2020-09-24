@@ -42,11 +42,12 @@ export class ManageProductComponent implements OnInit, OnDestroy, AfterViewInit 
   deleteProduct(product) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
+        confirmButton: 'btn btn-success mx-1',
+        cancelButton: 'btn btn-danger mx-1'
       },
       buttonsStyling: false
     });
+
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',
@@ -92,6 +93,5 @@ export class ManageProductComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
   }
 }

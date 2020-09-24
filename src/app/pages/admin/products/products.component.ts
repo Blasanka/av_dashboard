@@ -85,6 +85,5 @@ export class AdminProductsComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
   }
 }

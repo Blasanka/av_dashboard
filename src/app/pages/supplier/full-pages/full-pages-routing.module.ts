@@ -17,7 +17,6 @@ const routes: Routes = [
         data: {
           title: 'Dashboard',
         },
-        canActivate: [AuthGuardGuard],
       },
       {
         path: 'products/add',
