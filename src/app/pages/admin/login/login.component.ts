@@ -50,7 +50,6 @@ export class LoginComponent {
         fullScreen: true
       });
       if (this.adminLoginForm.value.email && this.adminLoginForm.value.password) {
-        // this.wait =true; 
         this.api.authenticateAdmin(JSON.stringify(this.adminLoginForm.value))
               .subscribe(
                   (data: any) => {

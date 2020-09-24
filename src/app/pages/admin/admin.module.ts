@@ -15,7 +15,9 @@ import { PipeModule } from 'app/shared/pipes/pipe.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatchHeightModule } from 'app/shared/directives/match-height.directive';
 import { AngularResizedEventModule } from 'angular-resize-event';
-import { Dashboard1Component } from './dashboard/dashboard1/dashboard1.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { QuillModule } from 'ngx-quill';
+import { AddNewProductComponent } from './add-product/add-product.component';
 
 
 @NgModule({
@@ -32,14 +34,15 @@ import { Dashboard1Component } from './dashboard/dashboard1/dashboard1.component
     SwiperModule,
     PipeModule,
     NgxDatatableModule,
-    CommonModule,
     MatchHeightModule,
-    AngularResizedEventModule
+    AngularResizedEventModule,
+    QuillModule.forRoot(),
   ],
   declarations: [
     LoginComponent,
     AdminProductsComponent,
-    Dashboard1Component,
+    DashboardComponent,
+    AddNewProductComponent,
   ],
 })
 export class AdminModule { }

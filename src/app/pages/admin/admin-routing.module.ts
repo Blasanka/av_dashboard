@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardGuard } from 'app/auth-guard.guard';
 import { AdminProductsComponent } from './products/products.component';
 import { LoginComponent } from './login/login.component';
-import { Dashboard1Component } from './dashboard/dashboard1/dashboard1.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddNewProductComponent } from './add-product/add-product.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: Dashboard1Component,
+        component: DashboardComponent,
         data: {
           title: 'Dashboard',
         },
@@ -22,6 +23,15 @@ const routes: Routes = [
       {
         path: 'products',
         component: AdminProductsComponent,
+        data: {
+          title: 'Products',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'products/add',
+        component: AddNewProductComponent,
         data: {
           title: 'Products',
         },

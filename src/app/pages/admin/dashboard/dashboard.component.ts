@@ -5,8 +5,8 @@ import ChartistTooltip from 'chartist-plugin-tooltips-updated';
 
 declare var require: any;
 
-const data: any = require('../../../../shared/data/chartist.json');
-import * as chartsData from '../../../../shared/data/chartjs';
+const data: any = require('../../../shared/data/chartist.json');
+import * as chartsData from '../../../shared/data/chartjs';
 
 export interface Chart {
   type: ChartType;
@@ -18,12 +18,12 @@ export interface Chart {
 }
 
 @Component({
-  selector: 'app-dashboard1',
-  templateUrl: './dashboard1.component.html',
-  styleUrls: ['./dashboard1.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
 
-export class Dashboard1Component {
+export class DashboardComponent {
 
   // Line area chart configuration Starts
   lineArea: Chart = {
@@ -174,14 +174,14 @@ export class Dashboard1Component {
     responsiveOptions: [
       ['screen and (max-width: 640px) and (min-width: 381px)', {
         axisX: {
-          labelInterpolationFnc: function (value, index) {
+          labelInterpolationFnc: function (value: any, index: number) {
             return index % 2 === 0 ? value : null;
           }
         }
       }],
       ['screen and (max-width: 380px)', {
         axisX: {
-          labelInterpolationFnc: function (value, index) {
+          labelInterpolationFnc: function (value: any, index: number) {
             return index % 3 === 0 ? value : null;
           }
         }
@@ -305,8 +305,8 @@ export class Dashboard1Component {
     options: {
       donut: true,
       startAngle: 0,
-      labelInterpolationFnc: function (value) {
-        var total = data['donutDashboard'].series.reduce(function (prev, series) {
+      labelInterpolationFnc: function (value: any) {
+        var total = data['donutDashboard'].series.reduce(function (prev: any, series: { value: any; }) {
           return prev + series.value;
         }, 0);
         return total + '%';
@@ -348,15 +348,15 @@ export class Dashboard1Component {
       ['screen and (max-width: 640px)', {
         seriesBarDistance: 5,
         axisX: {
-          labelInterpolationFnc: function (value) {
+          labelInterpolationFnc: function (value: any[]) {
             return value[0];
           }
         }
       }]
     ],
     events: {
-      created(data: any): void {
-        var defs = data.svg.elem('defs');
+      created(res: any): void {
+        const defs = res.svg.elem('defs');
         defs.elem('linearGradient', {
           id: 'gradient4',
           x1: 0,
@@ -412,13 +412,12 @@ export class Dashboard1Component {
         });
 
       },
-      draw(data: any): void {
-        var barHorizontalCenter, barVerticalCenter, label, value;
-        if (data.type === 'bar') {
+      draw(res: any): void {
+        if (res.type === 'bar') {
 
-          data.element.attr({
+          res.element.attr({
             y1: 195,
-            x1: data.x1 + 0.001
+            x1: res.x1 + 0.001
           });
 
         }

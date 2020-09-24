@@ -12,9 +12,9 @@ import { ApiServiceService } from 'app/api-service.service';
 })
 export class SupplierLoginComponent {
 
- loginFormSubmitted = false;
+  loginFormSubmitted = false;
   isLoginFailed = false;
-  failed_message='';
+  failed_message = '';
 
   supplierLoginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -58,6 +58,7 @@ export class SupplierLoginComponent {
                       if(data.code == 200 ){
                         this.api.setSession(data);
                         console.log('Supplier is logged in');
+                        localStorage.setItem('userRole', 'supplier');
                         this.router.navigate(['/supplier/dashboard']);
                       } else if (data.code == 401){
                         this.isLoginFailed = true;

@@ -5,8 +5,8 @@ export const HROUTES: RouteInfo[] = [
   {
     path: '', title: 'Dash', icon: 'ft-home', class: 'dropdown nav-item has-sub', isExternalLink: false,
     submenu: [
-      { path: '/dashboard/dashboard1', title: 'Dashboard 1', icon: 'ft-arrow-right submenu-icon', class: 'dropdown-item', isExternalLink: false, submenu: [] },
-      { path: '/dashboard/dashboard2', title: 'Dashboard 2', icon: 'ft-arrow-right submenu-icon', class: 'dropdown-item', isExternalLink: false, submenu: [] }
+      { path: '/supplier/dashboard', title: 'Dashboard 1', icon: 'ft-arrow-right submenu-icon', class: 'dropdown-item', isExternalLink: false, submenu: [] },
+      { path: '/admin/dashboard', title: 'Dashboard 2', icon: 'ft-arrow-right submenu-icon', class: 'dropdown-item', isExternalLink: false, submenu: [] }
     ]
   },
   {

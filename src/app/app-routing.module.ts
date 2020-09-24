@@ -58,7 +58,9 @@ const appRoutes: Routes = [
   {
     path: 'supplier',
     component: FullLayoutComponent,
-    data: { title: 'Supplier' },
+    data: {
+      title: 'Supplier',
+    },
     children: FULL_ROUTES,
   },
   {

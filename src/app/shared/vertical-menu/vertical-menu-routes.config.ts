@@ -1,7 +1,7 @@
 import { RouteInfo } from './vertical-menu.metadata';
 
-//Sidebar menu Routes and data
-export const ROUTES: RouteInfo[] = [
+// Sidebar menu Routes and data
+export const SUPPLIER_ROUTES: RouteInfo[] = [
 
   {
     path: '/supplier/dashboard', title: 'Dashboard', icon: 'ft-home', class: '', badge: '2', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [] },
@@ -190,4 +190,30 @@ export const ROUTES: RouteInfo[] = [
   // },
   // { path: 'https://pixinvent.com/apex-angular-4-bootstrap-admin-template/documentation', title: 'Documentation', icon: 'ft-book', class: '', badge: '', badgeClass: '', isExternalLink: true, submenu: [] },
   // { path: 'https://pixinvent.ticksy.com/', title: 'Support', icon: 'ft-life-buoy', class: '', badge: '', badgeClass: '', isExternalLink: true, submenu: [] },
+];
+
+export const ADMIN_ROUTES: RouteInfo[] = [
+
+  {
+    path: '/admin/dashboard', title: 'Dashboard', icon: 'ft-home', class: '', badge: '2', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [] },
+  { path: '/admin/dashboard/products', title: 'Products', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+        submenu: [
+          { path: '/admin/dashboard/products/add', title: 'New Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+          { path: '/admin/dashboard/products', title: 'Manage Product', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        ]
+},
+  { path: '/admin/dashboard/orders', title: 'Orders', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+    { path: 'admin/dashboard/orders/add', title: 'Pending Inquiry', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: 'admin/dashboard/orders', title: 'Manage Orders', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  ] },
+  { path: '/admin/dashboard/reviews', title: 'Reviews', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+    { path: 'admin/dashboard/reviews/add', title: 'New Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: 'admin/dashboard/reviews', title: 'All Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+
+  ] },
+  { path: 'admin/dashboard/promotions', title: 'Promotions', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+    { path: 'admin/dashboard/promotions/add', title: 'Add Promotion', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: 'admin/dashboard/promotions', title: 'Manage Promotions', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+
+  ] },
 ];
