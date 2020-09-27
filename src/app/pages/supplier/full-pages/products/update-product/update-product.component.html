@@ -10,7 +10,7 @@
       <!-- 1st column starts -->
       <div class="col-lg-12 col-12">
         <div class="row">
-          <form [formGroup]="supplierForm" (ngSubmit)="submitProduct()" class="col-12">
+          <form [formGroup]="supplierForm" (ngSubmit)="submitProductWithImages()" class="col-12">
             <!-- Basic Info starts -->
             <div class="col-12">
               <div class="card">
@@ -27,7 +27,7 @@
                           class="form-control" 
                           id="product_name" 
                           formControlName="product_name" 
-                          value="" />
+                          [(ngModel)]="selectedProduct.product_name" />
                       </div>
                     </div>
                     <div class="form-group row">
@@ -37,7 +37,8 @@
                           [styles]="{height: '200px'}"
                           [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.description.invalid, 'is-valid': supplierFormSubmitted && !sf.description.invalid }"
                           id="description" 
-                          formControlName="description"></quill-editor>
+                          formControlName="description"
+                          [(ngModel)]="selectedProduct.description"></quill-editor>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -47,7 +48,8 @@
                           [ngClass]="{'is-invalid': supplierFormSubmitted && sf.specifications.invalid, 'is-valid': supplierFormSubmitted && !sf.specifications.invalid }" 
                           [styles]="{height: '200px'}"
                           id="specifications" 
-                          formControlName="specifications"></quill-editor>
+                          formControlName="specifications"
+                          [(ngModel)]="selectedProduct.specifications"></quill-editor>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -57,8 +59,8 @@
                           [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.color.invalid, 'is-valid': supplierFormSubmitted && !sf.color.invalid }"
                           class="form-control" 
                           id="color" 
-                          formControlName="color" 
-                          value="" />
+                          formControlName="color"
+                          [(ngModel)]="selectedProduct.color"  />
                       </div>
                     </div>
                     <div class="form-group row">
@@ -69,7 +71,7 @@
                           class="form-control" 
                           id="price" 
                           formControlName="price"
-                          value="" />
+                          [(ngModel)]="selectedProduct.price" />
                       </div>
                     </div>
                     <div class="form-group row">
@@ -79,8 +81,8 @@
                           [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.aqty.invalid, 'is-valid': supplierFormSubmitted && !sf.aqty.invalid }"
                           class="form-control" 
                           id="aqty" 
-                          formControlName="aqty" 
-                          value="" />
+                          formControlName="aqty"
+                          [(ngModel)]="selectedProduct.aqty" />
                       </div>
                     </div>
                     <div class="form-group row">
@@ -89,7 +91,6 @@
                         <div #image class="image-wrapper"></div>
                         <div #browseBtn class="browse-btn">
                           <input type="file"
-                            [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.attachment.invalid, 'is-valid': supplierFormSubmitted && !sf.attachment.invalid }"
                             formControlName="attachment" name="attachment" id="attachment" (change)="onImageFileChanged($event)" />
                           <div class="browse-image">
                             <img src="assets/img/icons/camera.png" width="60px" />
@@ -102,7 +103,7 @@
                       <div class="col-md-2"></div>
                       <div class="col-md-10">
                           <div class="px-1">
-                            <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-success">Update</button>&nbsp;&nbsp;
                             <button type="button" (click)="resetProductForm()" class="btn btn-danger">Reset</button>
                           </div>
                       </div>

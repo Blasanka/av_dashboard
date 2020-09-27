@@ -37,7 +37,7 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'products/manage/update',
+        path: 'products/manage/update/:id',
         component: UpdateProductComponent,
         data: {
           title: 'Update Product',

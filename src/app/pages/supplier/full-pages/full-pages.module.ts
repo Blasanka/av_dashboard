@@ -60,5 +60,6 @@ import { UpdateProductComponent } from './products/update-product/update-product
     NewPromotionsComponent,
     ManagePromotionsComponent,
   ],
+  providers: [Location]
 })
 export class FullPagesModule {}

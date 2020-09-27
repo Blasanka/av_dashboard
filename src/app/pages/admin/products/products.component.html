@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let prod of products">
-                    <td><img class="height-50" *ngFor="let img of prod.attachment" src={{img}} alt={{prod.product_name}} /></td>
+                    <td><img class="height-50 mr-1" *ngFor="let img of prod.attachment" [src]="'http://127.0.0.1:8000/storage/'+img" alt={{prod.product_name}} /></td>
                     <td>{{prod.product_name}}</td>
                     <!-- <td>{{prod.description}}</td>
                     <td>{{prod.specifications}}</td> -->

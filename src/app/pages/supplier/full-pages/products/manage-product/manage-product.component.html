@@ -25,7 +25,7 @@
                 <tbody>
                 <tr *ngFor="let prod of products">
                     <td>
-                        <img class="height-50" *ngFor="let img of prod.attachment" src={{img}} alt={{prod.product_name}} />
+                        <img class="height-50 mr-1" *ngFor="let img of prod.attachment" [src]="'http://127.0.0.1:8000/storage/'+img" alt={{prod.product_name}} />
                     </td>
                     <td>{{prod.product_name}}</td>
                     <!-- <td>{{prod.description}}</td>
@@ -43,7 +43,7 @@
                     </td>
                     <td>
                         <!-- (click)="navigateToUpdateForm(prod)" -->
-                        <a [routerLink]="['/supplier/dashboard/products/manage/update']"><i class="ft-edit-2"></i></a>
+                        <a [routerLink]="['/supplier/dashboard/products/manage/update', prod.id]"><i class="ft-edit-2"></i></a>
                     </td>
                     <td (click)="deleteProduct(prod)">
                         <i class="ft-trash-2"></i>

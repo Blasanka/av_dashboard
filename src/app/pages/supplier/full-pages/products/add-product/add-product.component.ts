@@ -190,7 +190,10 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
         this.api
           .submitSuplierProduct(JSON.stringify(this.supplierForm.value))
           .pipe(
-            finalize(() => this.spinner.hide())
+            finalize(() => {
+              this.spinner.hide();
+              this.resetProductForm();
+            })
           )
           .subscribe((data: any) => {
             Swal.fire(

@@ -55,7 +55,6 @@ export class SupplierLoginComponent {
                   (data: any) => {
                       if (data.code == 200 ) {
                         this.api.setSession(data);
-                        console.log('Supplier is logged in');
                         localStorage.setItem('userRole', 'supplier');
                         this.router.navigate(['/supplier/dashboard']);
                       } else if (data.code == 401) {

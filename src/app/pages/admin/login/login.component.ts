@@ -55,6 +55,7 @@ export class LoginComponent {
                   (data: any) => {
                       if (data.code == 200) {
                         this.api.setSession(data);
+                        localStorage.setItem('userRole', 'admin');
                         this.spinner.hide();
                         this.router.navigate(['/admin/dashboard']);
                       } else if (data.code === 500) {

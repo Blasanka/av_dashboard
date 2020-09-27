@@ -20,19 +20,24 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize } from 'rxjs/internal/operators/finalize';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
-  styleUrls: ['./update-product.component.scss']
+  styleUrls: ['./update-product.component.css']
 })
 export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit {
   public config: any = {};
   layoutSub: Subscription;
+  paramSub: Subscription;
   readonly: Boolean = false;
   supplierForm: FormGroup;
   Supplier_Name: String;
   supplierFormSubmitted = false;
+
+  public selectedProduct: any = {};
 
   // Selected image files
   files: File[] = [];
@@ -58,6 +63,8 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
     private api: ApiServiceService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.config = this.configService.templateConf;
   }
@@ -71,6 +78,46 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
         this.cdr.markForCheck();
       }
     );
+
+    this.paramSub = this.route.params.subscribe(params => {
+      const productId = params['id'];
+      this.spinner.show('Loading...', {
+        type: 'ball-triangle-path',
+        size: 'medium',
+        bdColor: 'rgba(0, 0, 0, 0.8)',
+        color: '#fff',
+        fullScreen: true
+      });
+      this.api.getSupplierProduct(productId).subscribe((res: any) => {
+        if (res.code == 200) {
+          this.selectedProduct = res.data;
+          if (res.data.attachment != null && res.data.attachment.length > 0 && res.data.attachment[0] !== '') {
+            this.selectedProduct.attachment.forEach(i => {
+              if (i != null && i !== '') {
+                this.liElement = this.renderer.createElement('li');
+                const img: HTMLImageElement = this.renderer.createElement('img');
+                img.src = `http://127.0.0.1:8000/storage/${i}`;
+                this.renderer.addClass(img, 'product-image');
+                const a: HTMLAnchorElement = this.renderer.createElement('a');
+                a.innerText = 'Delete';
+                this.renderer.addClass(a, 'delete-btn');
+                a.addEventListener('click', this.deleteProductImage.bind(this, i, a));
+
+                this.renderer.appendChild(this.image.nativeElement, this.liElement);
+                this.renderer.appendChild(this.liElement, img);
+                this.renderer.appendChild(this.liElement, a);
+                if (this.files.length === 5) {
+                  this.renderer.setStyle(this.browseBtn.nativeElement, 'display', 'none');
+                }
+              }
+            });
+          }
+          this.spinner.hide();
+        } else {
+          this.spinner.hide();
+        }
+      });
+    });
     const numRegex = /^((\+|-)?([0-9]+)(\.[0-9]+)?)|((\+|-)?\.?[0-9]+)$/;
 
     this.supplierForm = this.formBuilder.group({
@@ -80,9 +127,6 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
       color: ['', Validators.required],
       price: ['', [Validators.required, Validators.pattern(numRegex)]],
       aqty: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      attachment: ['', Validators.required],
-      // supID: ['', Validators.pattern(nicregex)],
-      // supBusinessInfo: [''],
     });
   }
 
@@ -134,7 +178,7 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
       const a: HTMLAnchorElement = this.renderer.createElement('a');
       a.innerText = 'Delete';
       this.renderer.addClass(a, 'delete-btn');
-      a.addEventListener('click', this.deleteProductImage.bind(this, selectedFile, a));
+      a.addEventListener('click', this.deleteProductImageFile.bind(this, selectedFile, a));
 
       this.renderer.appendChild(this.image.nativeElement, this.liElement);
       this.renderer.appendChild(this.liElement, img);
@@ -145,7 +189,7 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
-  deleteProductImage(file, a) {
+  deleteProductImageFile(file, a) {
     const formData = new FormData();
     formData.append('filename', file.name);
     a.parentElement.remove();
@@ -155,19 +199,22 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
+  deleteProductImage(url, a) {
+    a.parentElement.remove();
+    const index = this.selectedProduct.attachment.indexOf(url, 0);
+    console.log(`index ${index}`);
+    if (index > -1) {
+      this.selectedProduct.attachment.splice(index, 1);
+      console.log(`index ${this.selectedProduct.attachment}`);
+    }
+  }
+
   resetProductImages() {
     this.liElement.remove();
     this.files = [];
   }
 
   submitImages() {
-    this.spinner.show(undefined, {
-      type: 'ball-triangle-path',
-      size: 'medium',
-      bdColor: 'rgba(0, 0, 0, 0.8)',
-      color: '#fff',
-      fullScreen: true
-    });
     const formData = new FormData();
     this.files.forEach((file: any) => {
       formData.append('attachment[]', file, file.name);
@@ -176,30 +223,83 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
     return this.api.submitSuplierProductImages(formData);
   }
 
-  submitProduct() {
+  submitProductWithImages() {
     this.supplierFormSubmitted = true;
     if (this.supplierForm.valid) {
+      this.spinner.show(undefined, {
+        type: 'ball-triangle-path',
+        size: 'medium',
+        bdColor: 'rgba(0, 0, 0, 0.8)',
+        color: '#fff',
+        fullScreen: true
+      });
+      if (this.files != null && this.files.length > 0) {
+        this.submitImages().subscribe((res: any) => {
+          if (res.code == 200) {
+            const previousAttachments = this.selectedProduct.attachment;
+            if (previousAttachments[0] != null && previousAttachments[0] !== '') {
+              console.log(previousAttachments);
+              this.selectedProduct.attachment = res.data;
+              previousAttachments.forEach(img => {
+                if (img != null && img !== '') {
+                  this.selectedProduct.attachment += `|${img}`;
+                }
+              });
+            } else {
+              this.selectedProduct.attachment = res.data;
+            }
+            this.updateProduct();
+          }
+        },
+        err => {
+          this.spinner.hide();
+        });
+      } else {
+        // If new images are not added we don t need to violate existing image paths with urls
+        let previousAttachments = '';
+        this.selectedProduct.attachment.forEach(img => {
+          if (img != null && img !== '') {
+            previousAttachments += `${img}|`;
+          }
+        });
+        this.selectedProduct.attachment = previousAttachments;
+        this.updateProduct();
+      }
+    } else {
+      this.spinner.hide();
+      return;
+    }
+  }
 
-      this.submitImages().subscribe((res: any) => {
-        this.supplierForm.value['price'] = parseFloat(this.supplierForm.value['price']);
-        this.supplierForm.value['aqty'] = parseInt(this.supplierForm.value['aqty'], 10);
-
-        this.supplierForm.value['attachment'] = res.data;
-        console.log(res.data);
-
-        this.api
-          .submitSuplierProduct(JSON.stringify(this.supplierForm.value))
+  updateProduct() {
+    this.supplierForm.value['price'] = parseFloat(this.supplierForm.value['price']);
+    this.supplierForm.value['aqty'] = parseInt(this.supplierForm.value['aqty'], 10);
+    this.api
+          .updateSupplierProduct(this.selectedProduct.id, JSON.stringify(this.selectedProduct))
           .pipe(
-            finalize(() => this.spinner.hide())
+            finalize(() => {
+              this.spinner.hide();
+              // this._location.replace('/supplier/dashboard/products/manage');
+            })
           )
           .subscribe((data: any) => {
-            Swal.fire(
-              'Thank you!',
-              data.message,
-              'success'
-            ).then(() => {
-              // this.resetProductForm();
-            });
+            if (data.code == 200) {
+              Swal.fire(
+                'Thank you!',
+                data.message,
+                'success'
+              ).then(() => {
+                // this.resetProductForm();
+                console.log(data);
+              });
+            } else {
+              Swal.fire(
+                data.message,
+                'Something went wrong, please try again',
+                'error'
+              );
+              console.log(data.message);
+            }
           },
           err => {
             Swal.fire(
@@ -212,13 +312,5 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
           () => {
             console.log('Done!');
           });
-      },
-      err => {
-        this.spinner.hide();
-      });
-    } else {
-      this.spinner.hide();
-      return;
-    }
   }
 }

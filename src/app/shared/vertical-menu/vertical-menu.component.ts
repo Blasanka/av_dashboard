@@ -92,7 +92,7 @@ export class VerticalMenuComponent implements OnInit, AfterViewInit, OnDestroy {
       const userRole = localStorage.getItem('userRole');
       if (userRole && userRole === 'supplier') {
         this.menuItems = SUPPLIER_ROUTES;
-      } else if (!userRole) {
+      } else if (userRole && userRole === 'admin') {
         this.menuItems = ADMIN_ROUTES;
       }
     }
