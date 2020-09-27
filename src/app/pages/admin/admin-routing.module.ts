@@ -5,6 +5,7 @@ import { AdminProductsComponent } from './products/products.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddNewProductComponent } from './add-product/add-product.component';
+import { ManageSuppliersComponent } from './manage-suppliers/manage-suppliers.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,15 @@ const routes: Routes = [
         component: AdminProductsComponent,
         data: {
           title: 'Products',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'suppliers',
+        component: ManageSuppliersComponent,
+        data: {
+          title: 'Suppliers',
         },
         canActivate: [AuthGuardGuard],
         pathMatch: 'full',

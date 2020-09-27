@@ -203,17 +203,20 @@ export const ADMIN_ROUTES: RouteInfo[] = [
         ]
 },
   { path: '/admin/dashboard/orders', title: 'Orders', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
-    { path: 'admin/dashboard/orders/add', title: 'Pending Inquiry', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    { path: 'admin/dashboard/orders', title: 'Manage Orders', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/admin/dashboard/orders/add', title: 'Pending Inquiry', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/admin/dashboard/orders', title: 'Manage Orders', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
   ] },
   { path: '/admin/dashboard/reviews', title: 'Reviews', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
-    { path: 'admin/dashboard/reviews/add', title: 'New Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    { path: 'admin/dashboard/reviews', title: 'All Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/admin/dashboard/reviews/add', title: 'New Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/admin/dashboard/reviews', title: 'All Reviews', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
 
   ] },
-  { path: 'admin/dashboard/promotions', title: 'Promotions', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
-    { path: 'admin/dashboard/promotions/add', title: 'Add Promotion', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-    { path: 'admin/dashboard/promotions', title: 'Manage Promotions', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  { path: '/admin/dashboard/promotions', title: 'Promotions', icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+    { path: '/admin/dashboard/promotions/add', title: 'Add Promotion', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/admin/dashboard/promotions', title: 'Manage Promotions', icon: 'ft-arrow-right submenu-icon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
 
   ] },
+  { path: '/admin/dashboard/suppliers', title: 'Manage Suppliers',
+    icon: 'ft-file-text', class: 'has-sub', badge: '', badgeClass: '',
+    isExternalLink: false, submenu: []},
 ];

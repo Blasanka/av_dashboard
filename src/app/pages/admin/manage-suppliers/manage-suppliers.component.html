@@ -1,0 +1,56 @@
+<div class="col-xl-12 col-lg-12 col-12">
+    <ngx-spinner></ngx-spinner>
+    <div class="card shopping-cart">
+        <div class="card-header pb-2">
+            <h4 class="card-title mb-1">Manage Suppliers</h4>
+        </div>
+        <div class="card-content">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+            <table class="table text-center m-0">
+                <thead>
+                <tr>
+                    <!-- <th>Attachment</th> -->
+                    <th>Supplier Name</th>
+                    <!-- <th>Description</th>
+                    <th>Specifications</th> -->
+                    <!-- <th>Color</th> -->
+                    <th>Address</th>
+                    <th>Mobile No</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let sup of suppliers">
+                    <!-- <td><img class="height-50 mr-1" *ngFor="let img of sup.attachment" [src]="'http://127.0.0.1:8000/storage/'+img" alt={{sup.product_name}} /></td> -->
+                    <td>{{sup.username}}</td>
+                    <!-- <td>{{sup.description}}</td>
+                    <td>{{sup.specifications}}</td> -->
+                    <!-- <td>{{sup.color}}</td> -->
+                    <td>{{sup.address}}</td>
+                    <td>{{sup.mobile}}</td>
+                    <td>
+                        <span *ngIf="sup.status == 0" class="badge badge-pill bg-light-info cursor-pointer">
+                            Pending
+                        </span>
+                        <span *ngIf="sup.status == 1" class="badge badge-pill bg-light-warning cursor-pointer">
+                            Active
+                        </span>
+                        <span *ngIf="sup.status == -1" class="badge badge-pill bg-light-danger cursor-pointer">
+                            Rejected
+                        </span>
+                    </td>
+                    <td style="text-align: left;">
+                        <span *ngIf="sup.status != 1" class="badge badge-success cursor-pointer mr-1 mb-1" (click)="changePendingStatus(sup, 1)">Approve</span>
+                        <span *ngIf="sup.status != -1" class="badge badge-danger cursor-pointer" (click)="changePendingStatus(sup, -1)">Reject</span>
+                    </td>
+                </tr>
+                <ngx-spinner></ngx-spinner>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>

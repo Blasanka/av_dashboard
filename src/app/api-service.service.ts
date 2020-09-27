@@ -133,6 +133,22 @@ export class ApiServiceService {
     return this.http.get(`${this.baseurl}admin/products`, { headers: headers });
   }
 
+  getAllSuppliers() {
+    let headers = new HttpHeaders();
+    headers = this.getHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Accept', 'application/json');
+    return this.http.get(`${this.baseurl}admin/suppliers`, { headers: headers });
+  }
+
+  changeSupplierStatus(data) {
+    let headers = new HttpHeaders();
+    headers = this.getHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Accept', 'application/json');
+    return this.http.put(`${this.baseurl}admin/suppliers`, data, { headers: headers });
+  }
+
   changeProductStatus(data) {
     let headers = new HttpHeaders();
     headers = this.getHeaders();

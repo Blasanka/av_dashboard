@@ -19,6 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuillModule } from 'ngx-quill';
 import { AddNewProductComponent } from './add-product/add-product.component';
 import { AdminRegisterPageComponent } from './register/admin-register-page.component';
+import { ManageSuppliersComponent } from './manage-suppliers/manage-suppliers.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { AdminRegisterPageComponent } from './register/admin-register-page.compo
     AdminProductsComponent,
     DashboardComponent,
     AddNewProductComponent,
+    ManageSuppliersComponent,
   ],
 })
 export class AdminModule { }
