@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiEndPoint:'https://system.concode.tech/api/'
+  apiEndPoint: 'http://api.roshanwerahare.xyz/api/',
+  resourcesBaseUrl: 'http://api.roshanwerahare.xyz/storage/',
 };
