@@ -79,6 +79,7 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
       specifications: ['', Validators.required],
       color: ['', Validators.required],
       price: ['', [Validators.required, Validators.pattern(numRegex)]],
+      sale_price: ['', [Validators.required, Validators.pattern(numRegex)]],
       aqty: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       attachment: ['', Validators.required],
       // supID: ['', Validators.pattern(nicregex)],
@@ -94,6 +95,7 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
     const conf = this.config;
     conf.layout.sidebar.collapsed = true;
     this.configService.applyTemplateConfigChange({ layout: conf.layout });
+    this.spinner.hide();
   }
 
   ngOnDestroy() {
@@ -112,6 +114,7 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
       specifications: '',
       color: '',
       price: '',
+      sale_price: '',
       aqty: '',
       attachment: '',
     });
@@ -182,6 +185,7 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.submitImages().subscribe((res: any) => {
         this.supplierForm.value['price'] = parseFloat(this.supplierForm.value['price']);
+        this.supplierForm.value['sale_price'] = parseFloat(this.supplierForm.value['sale_price']);
         this.supplierForm.value['aqty'] = parseInt(this.supplierForm.value['aqty'], 10);
 
         this.supplierForm.value['attachment'] = res.data;

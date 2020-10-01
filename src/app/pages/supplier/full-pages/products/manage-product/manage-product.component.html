@@ -16,16 +16,16 @@
                     <th>Specifications</th> -->
                     <!-- <th>Color</th> -->
                     <th>Qty</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Retail Price</th>
+                    <th>Sale Price</th>
+                    <th>Status & Visibility</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let prod of products">
                     <td>
-                        <img class="height-50 mr-1" *ngFor="let img of prod.attachment" [src]="'http://127.0.0.1:8000/storage/'+img" alt={{prod.product_name}} />
+                        <img class="height-50 mr-1 mb-1" *ngFor="let img of prod.attachment" [src]="'http://127.0.0.1:8000/storage/'+img" alt={{prod.product_name}} />
                     </td>
                     <td>{{prod.product_name}}</td>
                     <!-- <td>{{prod.description}}</td>
@@ -33,20 +33,33 @@
                     <!-- <td>{{prod.color}}</td> -->
                     <td>{{prod.aqty}}</td>
                     <td>{{prod.price}}</td>
+                    <td>{{prod.sale_price}}</td>
                     <td>
-                        <span *ngIf="prod.status == 0" class="badge badge-pill bg-light-danger cursor-pointer">
-                            {{(prod.status == -1) ? 'Removed' : 'Pending'}}
-                        </span>
-                        <span *ngIf="prod.status == 1" class="badge badge-pill bg-light-info cursor-pointer">
-                            Active
-                        </span>
+                        <div class="py-2">
+                            <span *ngIf="prod.status == 0" class="badge badge-pill bg-light-danger cursor-pointer">
+                                {{(prod.status == -1) ? 'Removed' : 'Pending'}}
+                            </span>
+                            <span *ngIf="prod.status == 1" class="badge badge-pill bg-light-info cursor-pointer">
+                                Active
+                            </span>
+                        </div>
+                        <div class="py-2">
+                            <span *ngIf="prod.visibility == 0" class="badge badge-pill bg-light-success cursor-pointer">
+                                <i class="fa fa-eye"></i> Visible
+                            </span>
+                            <span *ngIf="prod.visibility == 1" class="badge badge-pill badge bg-light-secondary cursor-pointer">
+                                <i class="fa fa-eye-slash"></i> Hidden
+                            </span>
+                        </div>
                     </td>
                     <td>
                         <!-- (click)="navigateToUpdateForm(prod)" -->
-                        <a [routerLink]="['/supplier/dashboard/products/manage/update', prod.id]"><i class="ft-edit-2"></i></a>
-                    </td>
-                    <td (click)="deleteProduct(prod)">
-                        <i class="ft-trash-2"></i>
+                        <span>
+                            <a class="p-2" [routerLink]="['/supplier/dashboard/products/manage/update', prod.id]"><i class="ft-edit-2"></i></a>
+                        </span>
+                        <span class="p-2" (click)="deleteProduct(prod)">
+                            <i class="ft-trash-2" style="color: red;"></i>
+                        </span>
                     </td>
                 </tr>
                 </tbody>

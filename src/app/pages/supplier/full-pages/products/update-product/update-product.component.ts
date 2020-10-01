@@ -126,6 +126,7 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
       specifications: ['', Validators.required],
       color: ['', Validators.required],
       price: ['', [Validators.required, Validators.pattern(numRegex)]],
+      sale_price: ['', [Validators.required, Validators.pattern(numRegex)]],
       aqty: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
     });
   }
@@ -156,6 +157,7 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
       specifications: '',
       color: '',
       price: '',
+      sale_price: '',
       aqty: '',
       attachment: '',
     });
@@ -273,6 +275,7 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
 
   updateProduct() {
     this.supplierForm.value['price'] = parseFloat(this.supplierForm.value['price']);
+    this.supplierForm.value['sale_price'] = parseFloat(this.supplierForm.value['sale_price']);
     this.supplierForm.value['aqty'] = parseInt(this.supplierForm.value['aqty'], 10);
     this.api
           .updateSupplierProduct(this.selectedProduct.id, JSON.stringify(this.selectedProduct))
