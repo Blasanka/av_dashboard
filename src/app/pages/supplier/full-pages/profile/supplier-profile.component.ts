@@ -117,7 +117,6 @@ export class SupplierProfileComponent implements OnInit, AfterViewInit, OnDestro
           },
           (err:any)=>{
             console.log(err);
-
           });
 
     }
