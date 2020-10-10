@@ -36,6 +36,14 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
   supplierForm: FormGroup;
   Supplier_Name: String;
   supplierFormSubmitted = false;
+  categories: any[];
+  subCategories: any[];
+  selectedCategoryName = 'Select category';
+  selectedCategoryId = 0;
+  selectedSubCategoryName = 'Select Sub category';
+  selectedSubCategoryId = 0;
+  isCategoryEmpty = false;
+  isSubCategoryEmpty = false;
 
   public selectedProduct: any = {};
 
@@ -112,6 +120,39 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
               }
             });
           }
+          this.selectedCategoryId = this.selectedProduct.category_id;
+          this.selectedSubCategoryId = this.selectedProduct.sub_category_id;
+
+          this.api.getCategories()
+          .pipe(
+            finalize(() => this.spinner.hide())
+          )
+          .subscribe((res: any) => {
+            this.categories = res.data;
+            this.categories.forEach((e) => {
+              if (e.id === this.selectedCategoryId) {
+                this.selectedCategoryName = e.category_name;
+              }
+            });
+          },
+          err => {
+            console.log(err);
+          });
+          this.api.getSubCategories()
+              .pipe(
+                finalize(() => this.spinner.hide())
+              )
+              .subscribe((res: any) => {
+                this.subCategories = res.data;
+                this.subCategories.forEach((e) => {
+                  if (e.id === this.selectedSubCategoryId) {
+                    this.selectedSubCategoryName = e.name;
+                  }
+                });
+              },
+              err => {
+                console.log(err);
+              });
           this.spinner.hide();
         } else {
           this.spinner.hide();
@@ -128,6 +169,7 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
       price: ['', [Validators.required, Validators.pattern(numRegex)]],
       sale_price: ['', [Validators.required, Validators.pattern(numRegex)]],
       aqty: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      attachment: '',
     });
   }
 
@@ -162,6 +204,10 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
       attachment: '',
     });
     this.resetProductImages();
+    this.selectedCategoryName = 'Select Category';
+    this.selectedCategoryId = 0;
+    this.selectedSubCategoryName = 'Select Sub Category';
+    this.selectedSubCategoryId = 0;
   }
 
   onImageFileChanged(event: any) {
@@ -239,8 +285,8 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
         this.submitImages().subscribe((res: any) => {
           if (res.code == 200) {
             const previousAttachments = this.selectedProduct.attachment;
-            if (previousAttachments[0] != null && previousAttachments[0] !== '') {
-              console.log(previousAttachments);
+            if (previousAttachments != null && previousAttachments[0] != null
+              && previousAttachments[0] !== '') {
               this.selectedProduct.attachment = res.data;
               previousAttachments.forEach(img => {
                 if (img != null && img !== '') {
@@ -259,13 +305,17 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
       } else {
         // If new images are not added we don t need to violate existing image paths with urls
         let previousAttachments = '';
-        this.selectedProduct.attachment.forEach(img => {
-          if (img != null && img !== '') {
-            previousAttachments += `${img}|`;
-          }
-        });
-        this.selectedProduct.attachment = previousAttachments;
-        this.updateProduct();
+        if (this.selectedProduct.attachment != null && typeof this.selectedProduct.attachment != 'string') {
+          this.selectedProduct.attachment.forEach(img => {
+            if (img != null && img !== '') {
+              previousAttachments += `${img}|`;
+            }
+          });
+          this.selectedProduct.attachment = previousAttachments;
+          this.updateProduct();
+        } else {
+          this.updateProduct();
+        }
       }
     } else {
       this.spinner.hide();
@@ -273,10 +323,44 @@ export class UpdateProductComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
+  changeSelectedCategory(category) {
+    this.selectedCategoryName = category.category_name;
+    this.selectedCategoryId = category.id;
+  }
+
+  changeSelectedSubCategory(subCategory) {
+    this.selectedSubCategoryName = subCategory.name;
+    this.selectedSubCategoryId = subCategory.id;
+  }
+
   updateProduct() {
+    this.supplierForm.value['category_id'] = this.selectedCategoryId;
+    this.supplierForm.value['sub_category_id'] = this.selectedSubCategoryId;
+
+    if (this.supplierForm.value['category_id'] === ''
+      || this.supplierForm.value['category_id'] === 0) {
+      this.isCategoryEmpty = true;
+      return;
+    } else {
+      this.isCategoryEmpty = false;
+    }
+    if (this.supplierForm.value['sub_category_id'] === ''
+      || this.supplierForm.value['sub_category_id'] === 0) {
+        this.isSubCategoryEmpty = true;
+        return;
+    } else {
+      this.isSubCategoryEmpty = false;
+    }
+
     this.supplierForm.value['price'] = parseFloat(this.supplierForm.value['price']);
     this.supplierForm.value['sale_price'] = parseFloat(this.supplierForm.value['sale_price']);
     this.supplierForm.value['aqty'] = parseInt(this.supplierForm.value['aqty'], 10);
+
+    this.selectedProduct.price = this.supplierForm.value['price'];
+    this.selectedProduct.sale_price = this.supplierForm.value['sale_price'];
+    this.selectedProduct.aqty = this.supplierForm.value['aqty'];
+    this.selectedProduct.category_id = this.supplierForm.value['category_id'];
+    this.selectedProduct.sub_category_id = this.supplierForm.value['sub_category_id'];
     this.api
           .updateSupplierProduct(this.selectedProduct.id, JSON.stringify(this.selectedProduct))
           .pipe(

@@ -16,28 +16,24 @@ export class ApiServiceService {
   private getHeaders() {
     let headers = new HttpHeaders();
     const token = localStorage.getItem('access_token');
-    headers = headers.set('Authorization', 'Bearer '+token);
+    headers = headers.set('Authorization', 'Bearer ' + token);
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Accept', 'application/json');
     return headers;
    }
 
   login(data) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.post(this.baseurl+'supplier_login', data, { headers: headers });
+    return this.http.post(this.baseurl + 'supplier_login', data, { headers: this.getHeaders() });
   }
 
   authenticateAdmin(data) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.post(`${this.baseurl}admin/login`, data, { headers: headers });
+    return this.http.post(`${this.baseurl}admin/login`, data, { headers: this.getHeaders() });
   }
 
   setSession(authResult) {
     console.log(authResult.token);
     const expiresAt = moment().add(authResult.data.expires_at, 'second');
-    console.log('hi... '+expiresAt);
+    console.log('hi... ' + expiresAt);
     localStorage.setItem('access_token',authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('username', authResult.data.username);
@@ -63,106 +59,97 @@ export class ApiServiceService {
   }
 
   supplier_registration(data) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.post(this.baseurl + 'supplier_registration', data, { headers: headers });
+    return this.http.post(this.baseurl + 'supplier_registration', data, { headers: this.getHeaders() });
   }
 
   getSupplierDetails() {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.get(this.baseurl+'get_profile_details',{ headers: headers });
+    return this.http.get(this.baseurl + 'get_profile_details',{ headers: this.getHeaders() });
   }
 
   updateSupplierDetails(data) {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.post(this.baseurl+'update_supplier_details', data, { headers: headers });
+    return this.http.post(this.baseurl + 'update_supplier_details', data, { headers: this.getHeaders() });
   }
 
   submitSuplierProduct(data) {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.post(`${this.baseurl}supplier/products`, data, { headers: headers });
+    return this.http.post(`${this.baseurl}supplier/products`, data, { headers: this.getHeaders() });
   }
 
   submitSuplierProductImages(data) {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    // headers = headers.set('Content-Type', undefined);
-    // headers = headers.set('Accept', 'multipart/form-data');
-    return this.http.post(`${this.baseurl}supplier/products/image`, data, { headers: headers });
+    let headers = this.getHeaders();
+    headers = headers.delete('Content-Type');
+    headers = headers.delete('Accept');
+    return this.http.post(`${this.baseurl}supplier/products/image`, data, { headers: headers});
   }
 
   updateSupplierProduct(id, data) {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.put(`${this.baseurl}supplier/products/${id}`, data, { headers: headers });
+    return this.http.put(`${this.baseurl}supplier/products/${id}`, data, { headers: this.getHeaders() });
   }
 
   getSuplierAllProducts() {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.get(`${this.baseurl}supplier/products`, { headers: headers });
+    return this.http.get(`${this.baseurl}supplier/products`, { headers: this.getHeaders() });
   }
 
   getSupplierProduct(id) {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.get(`${this.baseurl}supplier/products/${id}`, { headers: headers });
+    return this.http.get(`${this.baseurl}supplier/products/${id}`, { headers: this.getHeaders() });
   }
 
   getAdminAllProducts() {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.get(`${this.baseurl}admin/products`, { headers: headers });
+    return this.http.get(`${this.baseurl}admin/products`, { headers: this.getHeaders() });
   }
 
   getAllSuppliers() {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.get(`${this.baseurl}admin/suppliers`, { headers: headers });
+    return this.http.get(`${this.baseurl}admin/suppliers`, { headers: this.getHeaders() });
   }
 
   changeSupplierStatus(data) {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.put(`${this.baseurl}admin/suppliers`, data, { headers: headers });
+    return this.http.put(`${this.baseurl}admin/suppliers`, data, { headers: this.getHeaders() });
   }
 
   changeProductStatus(data) {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.put(`${this.baseurl}admin/products`, data, { headers: headers });
+    return this.http.put(`${this.baseurl}admin/products`, data, { headers: this.getHeaders() });
   }
 
   deleteProduct(id) {
-    let headers = new HttpHeaders();
-    headers = this.getHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept', 'application/json');
-    return this.http.delete(`${this.baseurl}supplier/products/${id}`, { headers: headers });
+    return this.http.delete(`${this.baseurl}supplier/products/${id}`, { headers: this.getHeaders() });
   }
 
+  submitCategory(data) {
+    return this.http.post(`${this.baseurl}categories`, data, { headers: this.getHeaders() });
+  }
+
+  deleteCategory(id) {
+    return this.http.delete(`${this.baseurl}categories/${id}`, { headers: this.getHeaders() });
+  }
+
+  updateCategory(id, data) {
+    return this.http.put(`${this.baseurl}categories/${id}`, data, { headers: this.getHeaders() });
+  }
+
+  getCategories() {
+    return this.http.get(`${this.baseurl}categories`, { headers: this.getHeaders() });
+  }
+
+  getCategory(id) {
+    return this.http.get(`${this.baseurl}categories/${id}`, { headers: this.getHeaders() });
+  }
+
+  submitSubCategory(data) {
+    return this.http.post(`${this.baseurl}sub-categories`, data, { headers: this.getHeaders() });
+  }
+
+  deleteSubCategory(id) {
+    return this.http.delete(`${this.baseurl}sub-categories/${id}`, { headers: this.getHeaders() });
+  }
+
+  updateSubCategory(id, data) {
+    return this.http.put(`${this.baseurl}sub-categories/${id}`, data, { headers: this.getHeaders() });
+  }
+
+  getSubCategories() {
+    return this.http.get(`${this.baseurl}sub-categories`, { headers: this.getHeaders() });
+  }
+
+  getSubCategory(id) {
+    return this.http.get(`${this.baseurl}sub-categories/${id}`, { headers: this.getHeaders() });
+  }
 }

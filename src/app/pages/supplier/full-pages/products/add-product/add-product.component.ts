@@ -33,6 +33,14 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
   supplierForm: FormGroup;
   Supplier_Name: String;
   supplierFormSubmitted = false;
+  categories: any[];
+  subCategories: any[];
+  selectedCategoryName = 'Select category';
+  selectedCategoryId = 0;
+  selectedSubCategoryName = 'Select Sub category';
+  selectedSubCategoryId = 0;
+  isCategoryEmpty = false;
+  isSubCategoryEmpty = false;
 
   // Selected image files
   files: File[] = [];
@@ -63,6 +71,15 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+
+    this.spinner.show(undefined, {
+      type: 'ball-triangle-path',
+      size: 'medium',
+      bdColor: 'rgba(0, 0, 0, 0.8)',
+      color: '#fff',
+      fullScreen: true
+    });
+
     this.layoutSub = this.configService.templateConf$.subscribe(
       (templateConf) => {
         if (templateConf) {
@@ -82,9 +99,29 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
       sale_price: ['', [Validators.required, Validators.pattern(numRegex)]],
       aqty: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       attachment: ['', Validators.required],
-      // supID: ['', Validators.pattern(nicregex)],
-      // supBusinessInfo: [''],
+      // category_id: '0',
+      // sub_category_id: '0',
     });
+    this.api.getCategories()
+      .pipe(
+        finalize(() => this.spinner.hide())
+      )
+      .subscribe((res: any) => {
+        this.categories = res.data;
+      },
+      err => {
+        console.log(err);
+      });
+    this.api.getSubCategories()
+      .pipe(
+        finalize(() => this.spinner.hide())
+      )
+      .subscribe((res: any) => {
+        this.subCategories = res.data;
+      },
+      err => {
+        console.log(err);
+      });
   }
 
   get sf() {
@@ -119,6 +156,10 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
       attachment: '',
     });
     this.resetProductImages();
+    this.selectedCategoryName = 'Select Category';
+    this.selectedCategoryId = 0;
+    this.selectedSubCategoryName = 'Select Sub Category';
+    this.selectedSubCategoryId = 0;
   }
 
   onImageFileChanged(event: any) {
@@ -179,8 +220,36 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.api.submitSuplierProductImages(formData);
   }
 
+  changeSelectedCategory(category) {
+    this.selectedCategoryName = category.category_name;
+    this.selectedCategoryId = category.id;
+  }
+
+  changeSelectedSubCategory(subCategory) {
+    this.selectedSubCategoryName = subCategory.name;
+    this.selectedSubCategoryId = subCategory.id;
+  }
+
   submitProduct() {
     this.supplierFormSubmitted = true;
+    this.supplierForm.value['category_id'] = this.selectedCategoryId;
+    this.supplierForm.value['sub_category_id'] = this.selectedSubCategoryId;
+
+    if (this.supplierForm.value['category_id'] === ''
+      || this.supplierForm.value['category_id'] === 0) {
+      this.isCategoryEmpty = true;
+      return;
+    } else {
+      this.isCategoryEmpty = false;
+    }
+    if (this.supplierForm.value['sub_category_id'] === ''
+      || this.supplierForm.value['sub_category_id'] === 0) {
+        this.isSubCategoryEmpty = true;
+        return;
+    } else {
+      this.isSubCategoryEmpty = false;
+    }
+
     if (this.supplierForm.valid) {
 
       this.submitImages().subscribe((res: any) => {
@@ -189,14 +258,12 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
         this.supplierForm.value['aqty'] = parseInt(this.supplierForm.value['aqty'], 10);
 
         this.supplierForm.value['attachment'] = res.data;
-        console.log(res.data);
 
         this.api
           .submitSuplierProduct(JSON.stringify(this.supplierForm.value))
           .pipe(
             finalize(() => {
               this.spinner.hide();
-              this.resetProductForm();
             })
           )
           .subscribe((data: any) => {
@@ -205,7 +272,7 @@ export class AddProductComponent implements OnInit, OnDestroy, AfterViewInit {
               data.message,
               'success'
             ).then(() => {
-              // this.resetProductForm();
+              this.resetProductForm();
             });
           },
           err => {

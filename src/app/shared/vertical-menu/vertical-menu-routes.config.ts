@@ -231,7 +231,7 @@ export const ADMIN_ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: '/admin/dashboard/products/manage',
+        path: '/admin/dashboard/products',
         title: 'Manage Product',
         icon: 'ft-arrow-right submenu-icon',
         class: '',

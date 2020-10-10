@@ -1,0 +1,38 @@
+<div class="col-xl-12 col-lg-12 col-12">
+    <div class="card shopping-cart">
+        <div class="card-header pb-2">
+            <h4 class="card-title mb-1">Manage Sub Categories</h4>
+        </div>
+        <div class="card-content">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+            <ngx-spinner></ngx-spinner>
+            <table class="table text-center m-0">
+                <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Sub Category Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let cat of subCategories">
+                    <td>{{cat.category_name}}</td>
+                    <td>{{cat.name}}</td>
+                    <td>
+                        <!-- (click)="navigateToUpdateForm(cat)" -->
+                        <span>
+                            <a class="p-2" [routerLink]="['/supplier/dashboard/sub-categories/manage/update', cat.id]"><i class="ft-edit-2"></i></a>
+                        </span>
+                        <span class="p-2" (click)="deleteSubCategory(cat)" style="cursor: hand;">
+                            <i class="ft-trash-2" style="color: red;"></i>
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>

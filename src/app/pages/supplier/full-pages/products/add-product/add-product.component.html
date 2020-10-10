@@ -90,8 +90,52 @@
                         [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.aqty.invalid, 'is-valid': supplierFormSubmitted && !sf.aqty.invalid }"
                         class="form-control" 
                         id="aqty" 
-                        formControlName="aqty" 
+                        formControlName="aqty"
                         value="" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="category_id" class="col-sm-2 col-form-label">Category</label>
+                    <div class="col-sm-10">
+                      <div ngbDropdown>
+                        <button type="button" class="btn btn-outline-primary mr-1" id="dropdownBasic1" ngbDropdownToggle>
+                            {{selectedCategoryName}}
+                        </button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <!-- [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.category_id.invalid, 'is-valid': supplierFormSubmitted && !sf.category_id.invalid }" -->
+                          <!-- <input type="hidden" name="category_id" 
+                            class="form-control"
+                            id="category_id"
+                            formControlName="category_id"
+                            [value]="selectedCategoryId" /> -->
+                          <button type="button" class="dropdown-item" *ngFor="let cat of categories" (click)="changeSelectedCategory(cat)">
+                            {{cat.category_name}}
+                          </button>
+                        </div>
+                      </div>
+                      <p style="color: red;" *ngIf="isCategoryEmpty">Category cannot be empty</p>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="sub_category_id" class="col-sm-2 col-form-label">Sub Category</label>
+                    <div class="col-sm-10">
+                      <div ngbDropdown>
+                        <button type="button" class="btn btn-outline-primary mr-1" id="dropdownBasic1" ngbDropdownToggle>
+                            {{selectedSubCategoryName}}
+                        </button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <!-- [ngClass]=" {'is-invalid': supplierFormSubmitted && sf.sub_category_id.invalid, 'is-valid': supplierFormSubmitted && !sf.sub_category_id.invalid }" -->
+                          <!-- <input type="hidden" name="sub_category_id" 
+                            class="form-control"
+                            id="sub_category_id"
+                            formControlName="sub_category_id"
+                            [value]="selectedSubCategoryId" /> -->
+                          <button type="button" class="dropdown-item" *ngFor="let subCat of subCategories" (click)="changeSelectedSubCategory(subCat)">
+                            {{subCat.name}}
+                          </button>
+                        </div>
+                      </div>
+                      <p style="color: red;" *ngIf="isSubCategoryEmpty">Sub Category cannot be empty</p>
                     </div>
                   </div>
                   <div class="form-group row">

@@ -6,6 +6,11 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddNewProductComponent } from './add-product/add-product.component';
 import { ManageSuppliersComponent } from './manage-suppliers/manage-suppliers.component';
+import { AddCategoryComponent } from '../common/category/add-category/add-category.component';
+import { ManageCategoryComponent } from '../common/category/manage-category/manage-category.component';
+import { ManageSubCategoryComponent } from '../common/sub-category/manage-sub-category/manage-sub-category.component';
+import { AddSubCategoryComponent } from '../common/sub-category/add-sub-category/add-sub-category.component';
+import { UpdateCategoryComponent } from '../common/category/update-category/update-category.component';
 
 
 const routes: Routes = [
@@ -44,6 +49,60 @@ const routes: Routes = [
         component: AddNewProductComponent,
         data: {
           title: 'Products',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'categories/add',
+        component: AddCategoryComponent,
+        data: {
+          title: 'Add Category',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'categories/manage',
+        component: ManageCategoryComponent,
+        data: {
+          title: 'Manage Category',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'categories/manage/update/:id',
+        component: UpdateCategoryComponent,
+        data: {
+          title: 'Manage Category',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'sub-categories/add',
+        component: AddSubCategoryComponent,
+        data: {
+          title: 'Add Sub Category',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'sub-categories/manage',
+        component: ManageSubCategoryComponent,
+        data: {
+          title: 'Manage Sub Category',
+        },
+        canActivate: [AuthGuardGuard],
+        pathMatch: 'full',
+      },
+      {
+        path: 'sub-categories/manage/update/:id',
+        component: UpdateCategoryComponent,
+        data: {
+          title: 'Manage Sub Category',
         },
         canActivate: [AuthGuardGuard],
         pathMatch: 'full',

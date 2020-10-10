@@ -29,6 +29,13 @@ import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 import { WINDOW_PROVIDERS } from './shared/services/window.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddCategoryComponent } from './pages/common/category/add-category/add-category.component';
+import { ManageCategoryComponent } from './pages/common/category/manage-category/manage-category.component';
+import { ManageSubCategoryComponent } from './pages/common/sub-category/manage-sub-category/manage-sub-category.component';
+import { AddSubCategoryComponent } from './pages/common/sub-category/add-sub-category/add-sub-category.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { UpdateCategoryComponent } from './pages/common/category/update-category/update-category.component';
+import { UpdateSubCategoryComponent } from './pages/common/sub-category/update-sub-category/update-sub-category.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -54,7 +61,13 @@ const firebaseConfig = {
   declarations: [
     AppComponent,
     FullLayoutComponent,
-    ContentLayoutComponent
+    ContentLayoutComponent,
+    AddCategoryComponent,
+    ManageCategoryComponent,
+    ManageSubCategoryComponent,
+    AddSubCategoryComponent,
+    UpdateCategoryComponent,
+    UpdateSubCategoryComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -67,6 +80,7 @@ const firebaseConfig = {
     NgbModule,
     ReactiveFormsModule,
     DeviceDetectorModule.forRoot(),
+    NgxSpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
